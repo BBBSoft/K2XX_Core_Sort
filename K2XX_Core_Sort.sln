@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "K2XX_Core_Sort", "K2XX_Core_Sort.vbproj", "{FCCED047-AA73-4E49-B158-3CE3B01E0DAC}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BBB_Printing", "BBB_Printing\BBB_Printing.vbproj", "{05634F0B-E687-4060-B99E-D926B9C10503}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCCED047-AA73-4E49-B158-3CE3B01E0DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCCED047-AA73-4E49-B158-3CE3B01E0DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCCED047-AA73-4E49-B158-3CE3B01E0DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCCED047-AA73-4E49-B158-3CE3B01E0DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05634F0B-E687-4060-B99E-D926B9C10503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05634F0B-E687-4060-B99E-D926B9C10503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05634F0B-E687-4060-B99E-D926B9C10503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05634F0B-E687-4060-B99E-D926B9C10503}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68374DA9-087F-415A-A4D2-35980A88ACFA}
+	EndGlobalSection
+EndGlobal

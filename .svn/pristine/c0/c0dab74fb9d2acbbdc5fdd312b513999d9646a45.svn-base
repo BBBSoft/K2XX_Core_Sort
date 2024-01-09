@@ -1,0 +1,45 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BBBLib
+</name>
+</assembly>
+<members>
+<member name="T:BBBLib.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:BBBLib.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:BBBLib.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:BBBLib.My.Resources.Resources.Warning_icon_Lg">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:BBBLib.Func.StripAllButAlphaAndNumeric(System.String)">
+ <summary>
+ Strips out everything but Alpha or Numeric Values from the supplied string.
+ </summary>
+ <param name="aString">String to Strip</param>
+ <returns>String</returns>
+ <remarks></remarks>
+</member>
+<member name="T:BBBLib.SQL.dsDataSet">
+ <summary>
+ Initializes a new instance of dsDataSet Structure
+ </summary>
+ <remarks></remarks>
+</member>
+</members>
+</doc>
