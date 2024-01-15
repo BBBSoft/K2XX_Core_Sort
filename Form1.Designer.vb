@@ -25,12 +25,6 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.cboxProducts = New System.Windows.Forms.ComboBox()
         Me.lblSelectProduct = New System.Windows.Forms.Label()
-        Me.tbRackBarcode = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblCorePN = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.lblCoreSN = New System.Windows.Forms.Label()
         Me.btnRunInhale = New System.Windows.Forms.Button()
         Me.lblQ2 = New System.Windows.Forms.Label()
         Me.lblQ1 = New System.Windows.Forms.Label()
@@ -63,6 +57,13 @@ Partial Class Form1
         Me.msMsg = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnClearProduct = New System.Windows.Forms.Button()
         Me.PanelK2XX = New System.Windows.Forms.Panel()
+        Me.PanelBushingInfo = New System.Windows.Forms.Panel()
+        Me.lblCFactorInfo = New System.Windows.Forms.Label()
+        Me.lblBushingInfo = New System.Windows.Forms.Label()
+        Me.lblCFactor = New System.Windows.Forms.Label()
+        Me.lblBushingType = New System.Windows.Forms.Label()
+        Me.lblBushing = New System.Windows.Forms.Label()
+        Me.btnNoTag = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ckboxSetBlacklist = New System.Windows.Forms.CheckBox()
         Me.PanelInhale = New System.Windows.Forms.Panel()
@@ -72,6 +73,11 @@ Partial Class Form1
         Me.UcIndicator1 = New SerialPort.ucIndicator()
         Me.lblRFIDTag = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.dgv = New System.Windows.Forms.DataGridView()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblRackBarcodeLen = New System.Windows.Forms.Label()
+        Me.btnClearData = New System.Windows.Forms.Button()
+        Me.btnDebug = New System.Windows.Forms.Button()
         Me.PanelDebug = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ckboxSaveDataEnabled = New System.Windows.Forms.CheckBox()
@@ -86,16 +92,20 @@ Partial Class Form1
         Me.ckboxBadDTCs = New System.Windows.Forms.CheckBox()
         Me.ckboxGoodMtr = New System.Windows.Forms.CheckBox()
         Me.ckboxBadMtr = New System.Windows.Forms.CheckBox()
-        Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblRackBarcodeLen = New System.Windows.Forms.Label()
-        Me.btnClearData = New System.Windows.Forms.Button()
-        Me.btnDebug = New System.Windows.Forms.Button()
         Me.PanelRB1 = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.lblCoreSNLen = New System.Windows.Forms.Label()
         Me.lblCorePNLen = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.lblRackBuildDate = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblCoreSN = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblCorePN = New System.Windows.Forms.Label()
+        Me.tbRackBarcode = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.UcRFID1 = New RFIDReader.ucRFID()
         Me.tmrMain = New System.Windows.Forms.Timer(Me.components)
         Me.tt = New System.Windows.Forms.ToolTip(Me.components)
@@ -112,10 +122,11 @@ Partial Class Form1
         Me.Panel4.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelK2XX.SuspendLayout()
+        Me.PanelBushingInfo.SuspendLayout()
         Me.PanelInhale.SuspendLayout()
         Me.PanelRFID.SuspendLayout()
-        Me.PanelDebug.SuspendLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelDebug.SuspendLayout()
         Me.PanelRB1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -137,68 +148,6 @@ Partial Class Form1
         Me.lblSelectProduct.TabIndex = 1
         Me.lblSelectProduct.Text = "Select Product:"
         Me.lblSelectProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'tbRackBarcode
-        '
-        Me.tbRackBarcode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.tbRackBarcode.Location = New System.Drawing.Point(126, 2)
-        Me.tbRackBarcode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbRackBarcode.Name = "tbRackBarcode"
-        Me.tbRackBarcode.Size = New System.Drawing.Size(553, 26)
-        Me.tbRackBarcode.TabIndex = 2
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 5)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(114, 20)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Rack Barcode:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 36)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(96, 20)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Core PN (P):"
-        '
-        'lblCorePN
-        '
-        Me.lblCorePN.BackColor = System.Drawing.Color.White
-        Me.lblCorePN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblCorePN.Location = New System.Drawing.Point(126, 31)
-        Me.lblCorePN.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblCorePN.Name = "lblCorePN"
-        Me.lblCorePN.Size = New System.Drawing.Size(246, 30)
-        Me.lblCorePN.TabIndex = 5
-        Me.lblCorePN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(56, 69)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(58, 20)
-        Me.Label6.TabIndex = 6
-        Me.Label6.Text = "SN (T):"
-        '
-        'lblCoreSN
-        '
-        Me.lblCoreSN.BackColor = System.Drawing.Color.White
-        Me.lblCoreSN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblCoreSN.Location = New System.Drawing.Point(126, 64)
-        Me.lblCoreSN.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblCoreSN.Name = "lblCoreSN"
-        Me.lblCoreSN.Size = New System.Drawing.Size(246, 30)
-        Me.lblCoreSN.TabIndex = 7
-        Me.lblCoreSN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'btnRunInhale
         '
@@ -399,7 +348,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.msMsg})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(964, 27)
+        Me.MenuStrip1.Size = New System.Drawing.Size(964, 24)
         Me.MenuStrip1.TabIndex = 21
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -407,72 +356,72 @@ Partial Class Form1
         '
         Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UnMarryRFIDsToolStripMenuItem, Me.LanguageToolStripMenuItem, Me.AllowEscKeyToolStripMenuItem, Me.ToggleDebugModeToolStripMenuItem, Me.ToolStripSeparator1, Me.ReProcessMPPsToolStripMenuItem, Me.ToolStripSeparator2, Me.SetupLabelPrinterToolStripMenuItem, Me.ReprintLabelFromRFIDTagToolStripMenuItem, Me.PrintScrapLabelToolStripMenuItem, Me.PrintLabelToolStripMenuItem})
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(57, 23)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'UnMarryRFIDsToolStripMenuItem
         '
         Me.UnMarryRFIDsToolStripMenuItem.Name = "UnMarryRFIDsToolStripMenuItem"
-        Me.UnMarryRFIDsToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.UnMarryRFIDsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.UnMarryRFIDsToolStripMenuItem.Text = "UnMarry RFIDs"
         Me.UnMarryRFIDsToolStripMenuItem.Visible = False
         '
         'LanguageToolStripMenuItem
         '
         Me.LanguageToolStripMenuItem.Name = "LanguageToolStripMenuItem"
-        Me.LanguageToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.LanguageToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.LanguageToolStripMenuItem.Text = "Language"
         '
         'AllowEscKeyToolStripMenuItem
         '
         Me.AllowEscKeyToolStripMenuItem.Name = "AllowEscKeyToolStripMenuItem"
-        Me.AllowEscKeyToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.AllowEscKeyToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.AllowEscKeyToolStripMenuItem.Text = "Allow Esc Key"
         '
         'ToggleDebugModeToolStripMenuItem
         '
         Me.ToggleDebugModeToolStripMenuItem.Name = "ToggleDebugModeToolStripMenuItem"
-        Me.ToggleDebugModeToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.ToggleDebugModeToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.ToggleDebugModeToolStripMenuItem.Text = "Toggle Debug Mode"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(245, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(216, 6)
         '
         'ReProcessMPPsToolStripMenuItem
         '
         Me.ReProcessMPPsToolStripMenuItem.Name = "ReProcessMPPsToolStripMenuItem"
-        Me.ReProcessMPPsToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.ReProcessMPPsToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.ReProcessMPPsToolStripMenuItem.Text = "Process MPP Reman"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(245, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(216, 6)
         '
         'SetupLabelPrinterToolStripMenuItem
         '
         Me.SetupLabelPrinterToolStripMenuItem.Name = "SetupLabelPrinterToolStripMenuItem"
-        Me.SetupLabelPrinterToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.SetupLabelPrinterToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.SetupLabelPrinterToolStripMenuItem.Text = "Setup Label Printer"
         '
         'ReprintLabelFromRFIDTagToolStripMenuItem
         '
         Me.ReprintLabelFromRFIDTagToolStripMenuItem.Name = "ReprintLabelFromRFIDTagToolStripMenuItem"
-        Me.ReprintLabelFromRFIDTagToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.ReprintLabelFromRFIDTagToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.ReprintLabelFromRFIDTagToolStripMenuItem.Text = "Reprint Label from RFID tag"
         '
         'PrintScrapLabelToolStripMenuItem
         '
         Me.PrintScrapLabelToolStripMenuItem.Name = "PrintScrapLabelToolStripMenuItem"
-        Me.PrintScrapLabelToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.PrintScrapLabelToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.PrintScrapLabelToolStripMenuItem.Text = "Reprint Scrap Label"
         '
         'PrintLabelToolStripMenuItem
         '
         Me.PrintLabelToolStripMenuItem.Name = "PrintLabelToolStripMenuItem"
-        Me.PrintLabelToolStripMenuItem.Size = New System.Drawing.Size(248, 24)
+        Me.PrintLabelToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.PrintLabelToolStripMenuItem.Text = "Reprint Last Label"
         Me.PrintLabelToolStripMenuItem.Visible = False
         '
@@ -481,7 +430,7 @@ Partial Class Form1
         Me.msMsg.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.msMsg.Name = "msMsg"
         Me.msMsg.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.msMsg.Size = New System.Drawing.Size(24, 23)
+        Me.msMsg.Size = New System.Drawing.Size(22, 20)
         Me.msMsg.Text = ":"
         '
         'btnClearProduct
@@ -498,11 +447,13 @@ Partial Class Form1
         Me.PanelK2XX.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelK2XX.Controls.Add(Me.PanelBushingInfo)
+        Me.PanelK2XX.Controls.Add(Me.lblBushing)
+        Me.PanelK2XX.Controls.Add(Me.btnNoTag)
         Me.PanelK2XX.Controls.Add(Me.ComboBox1)
         Me.PanelK2XX.Controls.Add(Me.ckboxSetBlacklist)
         Me.PanelK2XX.Controls.Add(Me.PanelInhale)
         Me.PanelK2XX.Controls.Add(Me.PanelRFID)
-        Me.PanelK2XX.Controls.Add(Me.PanelDebug)
         Me.PanelK2XX.Controls.Add(Me.dgv)
         Me.PanelK2XX.Controls.Add(Me.Label4)
         Me.PanelK2XX.Controls.Add(Me.lblRackBarcodeLen)
@@ -512,12 +463,85 @@ Partial Class Form1
         Me.PanelK2XX.Controls.Add(Me.Panel4)
         Me.PanelK2XX.Controls.Add(Me.PanelQ3)
         Me.PanelK2XX.Controls.Add(Me.PanelQ2)
+        Me.PanelK2XX.Controls.Add(Me.PanelDebug)
         Me.PanelK2XX.Controls.Add(Me.PanelRB1)
         Me.PanelK2XX.Enabled = False
         Me.PanelK2XX.Location = New System.Drawing.Point(8, 213)
         Me.PanelK2XX.Name = "PanelK2XX"
         Me.PanelK2XX.Size = New System.Drawing.Size(944, 534)
         Me.PanelK2XX.TabIndex = 24
+        '
+        'PanelBushingInfo
+        '
+        Me.PanelBushingInfo.Controls.Add(Me.lblCFactorInfo)
+        Me.PanelBushingInfo.Controls.Add(Me.lblBushingInfo)
+        Me.PanelBushingInfo.Controls.Add(Me.lblCFactor)
+        Me.PanelBushingInfo.Controls.Add(Me.lblBushingType)
+        Me.PanelBushingInfo.Location = New System.Drawing.Point(455, 85)
+        Me.PanelBushingInfo.Name = "PanelBushingInfo"
+        Me.PanelBushingInfo.Size = New System.Drawing.Size(294, 123)
+        Me.PanelBushingInfo.TabIndex = 30
+        Me.PanelBushingInfo.Visible = False
+        '
+        'lblCFactorInfo
+        '
+        Me.lblCFactorInfo.BackColor = System.Drawing.Color.White
+        Me.lblCFactorInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblCFactorInfo.Location = New System.Drawing.Point(120, 45)
+        Me.lblCFactorInfo.Name = "lblCFactorInfo"
+        Me.lblCFactorInfo.Size = New System.Drawing.Size(80, 25)
+        Me.lblCFactorInfo.TabIndex = 3
+        Me.lblCFactorInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblBushingInfo
+        '
+        Me.lblBushingInfo.BackColor = System.Drawing.Color.White
+        Me.lblBushingInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblBushingInfo.Location = New System.Drawing.Point(120, 15)
+        Me.lblBushingInfo.Name = "lblBushingInfo"
+        Me.lblBushingInfo.Size = New System.Drawing.Size(80, 25)
+        Me.lblBushingInfo.TabIndex = 2
+        Me.lblBushingInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblCFactor
+        '
+        Me.lblCFactor.Location = New System.Drawing.Point(5, 45)
+        Me.lblCFactor.Name = "lblCFactor"
+        Me.lblCFactor.Size = New System.Drawing.Size(115, 25)
+        Me.lblCFactor.TabIndex = 1
+        Me.lblCFactor.Text = "C-Factor:"
+        Me.lblCFactor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblBushingType
+        '
+        Me.lblBushingType.Location = New System.Drawing.Point(5, 15)
+        Me.lblBushingType.Name = "lblBushingType"
+        Me.lblBushingType.Size = New System.Drawing.Size(115, 25)
+        Me.lblBushingType.TabIndex = 0
+        Me.lblBushingType.Text = "Bushing Type:"
+        Me.lblBushingType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblBushing
+        '
+        Me.lblBushing.AutoSize = True
+        Me.lblBushing.Location = New System.Drawing.Point(436, 177)
+        Me.lblBushing.Name = "lblBushing"
+        Me.lblBushing.Size = New System.Drawing.Size(13, 20)
+        Me.lblBushing.TabIndex = 41
+        Me.lblBushing.Text = "."
+        Me.lblBushing.Visible = False
+        '
+        'btnNoTag
+        '
+        Me.btnNoTag.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNoTag.Location = New System.Drawing.Point(700, 5)
+        Me.btnNoTag.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnNoTag.Name = "btnNoTag"
+        Me.btnNoTag.Size = New System.Drawing.Size(150, 29)
+        Me.btnNoTag.TabIndex = 40
+        Me.btnNoTag.Text = "No Tag"
+        Me.btnNoTag.UseVisualStyleBackColor = True
+        Me.btnNoTag.Visible = False
         '
         'ComboBox1
         '
@@ -617,6 +641,62 @@ Partial Class Form1
         Me.Label10.TabIndex = 32
         Me.Label10.Text = "RFID:"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dgv
+        '
+        Me.dgv.AllowUserToAddRows = False
+        Me.dgv.AllowUserToDeleteRows = False
+        Me.dgv.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv.Location = New System.Drawing.Point(0, 238)
+        Me.dgv.Name = "dgv"
+        Me.dgv.ReadOnly = True
+        Me.dgv.Size = New System.Drawing.Size(941, 70)
+        Me.dgv.TabIndex = 27
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(223, 211)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(92, 20)
+        Me.Label4.TabIndex = 28
+        Me.Label4.Text = "Inhale Data"
+        '
+        'lblRackBarcodeLen
+        '
+        Me.lblRackBarcodeLen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblRackBarcodeLen.AutoSize = True
+        Me.lblRackBarcodeLen.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRackBarcodeLen.Location = New System.Drawing.Point(667, 70)
+        Me.lblRackBarcodeLen.Name = "lblRackBarcodeLen"
+        Me.lblRackBarcodeLen.Size = New System.Drawing.Size(21, 13)
+        Me.lblRackBarcodeLen.TabIndex = 26
+        Me.lblRackBarcodeLen.Text = "##"
+        '
+        'btnClearData
+        '
+        Me.btnClearData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClearData.Location = New System.Drawing.Point(700, 40)
+        Me.btnClearData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnClearData.Name = "btnClearData"
+        Me.btnClearData.Size = New System.Drawing.Size(150, 29)
+        Me.btnClearData.TabIndex = 14
+        Me.btnClearData.Text = "Clear Data"
+        Me.btnClearData.UseVisualStyleBackColor = True
+        Me.btnClearData.Visible = False
+        '
+        'btnDebug
+        '
+        Me.btnDebug.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDebug.Location = New System.Drawing.Point(865, 40)
+        Me.btnDebug.Name = "btnDebug"
+        Me.btnDebug.Size = New System.Drawing.Size(75, 29)
+        Me.btnDebug.TabIndex = 21
+        Me.btnDebug.Text = "Debug"
+        Me.btnDebug.UseVisualStyleBackColor = True
         '
         'PanelDebug
         '
@@ -773,68 +853,14 @@ Partial Class Form1
         Me.ckboxBadMtr.Text = "Bad Motor (Bad DTC)"
         Me.ckboxBadMtr.UseVisualStyleBackColor = True
         '
-        'dgv
-        '
-        Me.dgv.AllowUserToAddRows = False
-        Me.dgv.AllowUserToDeleteRows = False
-        Me.dgv.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Location = New System.Drawing.Point(0, 238)
-        Me.dgv.Name = "dgv"
-        Me.dgv.ReadOnly = True
-        Me.dgv.Size = New System.Drawing.Size(941, 70)
-        Me.dgv.TabIndex = 27
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(223, 211)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(92, 20)
-        Me.Label4.TabIndex = 28
-        Me.Label4.Text = "Inhale Data"
-        '
-        'lblRackBarcodeLen
-        '
-        Me.lblRackBarcodeLen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblRackBarcodeLen.AutoSize = True
-        Me.lblRackBarcodeLen.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRackBarcodeLen.Location = New System.Drawing.Point(667, 70)
-        Me.lblRackBarcodeLen.Name = "lblRackBarcodeLen"
-        Me.lblRackBarcodeLen.Size = New System.Drawing.Size(21, 13)
-        Me.lblRackBarcodeLen.TabIndex = 26
-        Me.lblRackBarcodeLen.Text = "##"
-        '
-        'btnClearData
-        '
-        Me.btnClearData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClearData.Location = New System.Drawing.Point(700, 40)
-        Me.btnClearData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.btnClearData.Name = "btnClearData"
-        Me.btnClearData.Size = New System.Drawing.Size(150, 29)
-        Me.btnClearData.TabIndex = 14
-        Me.btnClearData.Text = "Clear Data"
-        Me.btnClearData.UseVisualStyleBackColor = True
-        Me.btnClearData.Visible = False
-        '
-        'btnDebug
-        '
-        Me.btnDebug.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDebug.Location = New System.Drawing.Point(865, 40)
-        Me.btnDebug.Name = "btnDebug"
-        Me.btnDebug.Size = New System.Drawing.Size(75, 29)
-        Me.btnDebug.TabIndex = 21
-        Me.btnDebug.Text = "Debug"
-        Me.btnDebug.UseVisualStyleBackColor = True
-        '
         'PanelRB1
         '
         Me.PanelRB1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelRB1.Controls.Add(Me.Label9)
         Me.PanelRB1.Controls.Add(Me.lblCoreSNLen)
         Me.PanelRB1.Controls.Add(Me.lblCorePNLen)
+        Me.PanelRB1.Controls.Add(Me.Label8)
         Me.PanelRB1.Controls.Add(Me.lblRackBuildDate)
         Me.PanelRB1.Controls.Add(Me.Label5)
         Me.PanelRB1.Controls.Add(Me.lblCoreSN)
@@ -843,10 +869,23 @@ Partial Class Form1
         Me.PanelRB1.Controls.Add(Me.tbRackBarcode)
         Me.PanelRB1.Controls.Add(Me.Label2)
         Me.PanelRB1.Controls.Add(Me.Label3)
+        Me.PanelRB1.Controls.Add(Me.Panel1)
         Me.PanelRB1.Location = New System.Drawing.Point(6, 41)
         Me.PanelRB1.Name = "PanelRB1"
         Me.PanelRB1.Size = New System.Drawing.Size(687, 134)
         Me.PanelRB1.TabIndex = 30
+        '
+        'Label9
+        '
+        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(379, 112)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(13, 14)
+        Me.Label9.TabIndex = 9
+        Me.Label9.Text = "#"
+        Me.Label9.Visible = False
         '
         'lblCoreSNLen
         '
@@ -868,6 +907,18 @@ Partial Class Form1
         Me.lblCorePNLen.TabIndex = 24
         Me.lblCorePNLen.Text = "##"
         '
+        'Label8
+        '
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(379, 94)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(13, 14)
+        Me.Label8.TabIndex = 9
+        Me.Label8.Text = "#"
+        Me.Label8.Visible = False
+        '
         'lblRackBuildDate
         '
         Me.lblRackBuildDate.BackColor = System.Drawing.Color.White
@@ -888,6 +939,75 @@ Partial Class Form1
         Me.Label5.Size = New System.Drawing.Size(87, 20)
         Me.Label5.TabIndex = 22
         Me.Label5.Text = "Build Date:"
+        '
+        'lblCoreSN
+        '
+        Me.lblCoreSN.BackColor = System.Drawing.Color.White
+        Me.lblCoreSN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblCoreSN.Location = New System.Drawing.Point(126, 64)
+        Me.lblCoreSN.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCoreSN.Name = "lblCoreSN"
+        Me.lblCoreSN.Size = New System.Drawing.Size(246, 30)
+        Me.lblCoreSN.TabIndex = 7
+        Me.lblCoreSN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(56, 69)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(58, 20)
+        Me.Label6.TabIndex = 6
+        Me.Label6.Text = "SN (T):"
+        '
+        'lblCorePN
+        '
+        Me.lblCorePN.BackColor = System.Drawing.Color.White
+        Me.lblCorePN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblCorePN.Location = New System.Drawing.Point(126, 31)
+        Me.lblCorePN.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCorePN.Name = "lblCorePN"
+        Me.lblCorePN.Size = New System.Drawing.Size(246, 30)
+        Me.lblCorePN.TabIndex = 5
+        Me.lblCorePN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'tbRackBarcode
+        '
+        Me.tbRackBarcode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbRackBarcode.Location = New System.Drawing.Point(126, 2)
+        Me.tbRackBarcode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.tbRackBarcode.Name = "tbRackBarcode"
+        Me.tbRackBarcode.Size = New System.Drawing.Size(553, 26)
+        Me.tbRackBarcode.TabIndex = 2
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(4, 5)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(114, 20)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Rack Barcode:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(18, 36)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(96, 20)
+        Me.Label3.TabIndex = 4
+        Me.Label3.Text = "Core PN (P):"
+        '
+        'Panel1
+        '
+        Me.Panel1.Location = New System.Drawing.Point(395, 36)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(539, 138)
+        Me.Panel1.TabIndex = 42
         '
         'UcRFID1
         '
@@ -980,12 +1100,12 @@ Partial Class Form1
         Me.Controls.Add(Me.lblBillOfLading)
         Me.Controls.Add(Me.btnChangeBoL)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.PanelK2XX)
         Me.Controls.Add(Me.btnClearProduct)
         Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.lblSelectProduct)
         Me.Controls.Add(Me.cboxProducts)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.PanelK2XX)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
@@ -1001,12 +1121,13 @@ Partial Class Form1
         Me.MenuStrip1.PerformLayout()
         Me.PanelK2XX.ResumeLayout(False)
         Me.PanelK2XX.PerformLayout()
+        Me.PanelBushingInfo.ResumeLayout(False)
         Me.PanelInhale.ResumeLayout(False)
         Me.PanelInhale.PerformLayout()
         Me.PanelRFID.ResumeLayout(False)
+        CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelDebug.ResumeLayout(False)
         Me.PanelDebug.PerformLayout()
-        CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelRB1.ResumeLayout(False)
         Me.PanelRB1.PerformLayout()
         Me.ResumeLayout(False)
@@ -1016,12 +1137,6 @@ Partial Class Form1
 
     Friend WithEvents cboxProducts As ComboBox
     Friend WithEvents lblSelectProduct As Label
-    Friend WithEvents tbRackBarcode As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents lblCorePN As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents lblCoreSN As Label
     Friend WithEvents btnRunInhale As Button
     Friend WithEvents lblQ2 As Label
     Friend WithEvents lblQ1 As Label
@@ -1044,29 +1159,13 @@ Partial Class Form1
     Friend WithEvents PanelK2XX As Panel
     Friend WithEvents btnDebug As Button
     Friend WithEvents btnClearData As Button
-    Friend WithEvents lblRackBuildDate As Label
-    Friend WithEvents Label5 As Label
     Friend WithEvents tmrMain As Timer
-    Friend WithEvents lblCoreSNLen As Label
-    Friend WithEvents lblCorePNLen As Label
     Friend WithEvents lblRackBarcodeLen As Label
     Friend WithEvents tt As ToolTip
     Friend WithEvents BGW As System.ComponentModel.BackgroundWorker
     Friend WithEvents dgv As DataGridView
     Friend WithEvents Label4 As Label
-    Friend WithEvents PanelDebug As Panel
-    Friend WithEvents ckboxConnectorBroken As CheckBox
-    Friend WithEvents ckboxHousingBroken As CheckBox
-    Friend WithEvents ckboxWaterIngression As CheckBox
-    Friend WithEvents ckboxNoComm As CheckBox
-    Friend WithEvents ckboxBadDTCs As CheckBox
-    Friend WithEvents ckboxGoodMtr As CheckBox
-    Friend WithEvents ckboxBadMtr As CheckBox
-    Friend WithEvents PanelRB1 As Panel
     Friend WithEvents msMsg As ToolStripMenuItem
-    Friend WithEvents lblBBBPN As Label
-    Friend WithEvents lblACDPN As Label
-    Friend WithEvents lblGMPN As Label
     Friend WithEvents lblRFIDTag As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents lblMessage As Label
@@ -1075,11 +1174,9 @@ Partial Class Form1
     Friend WithEvents PanelRFID As Panel
     Friend WithEvents PanelInhale As Panel
     Friend WithEvents ToggleDebugModeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ckboxOnBlacklist As CheckBox
     Friend WithEvents ckboxSetBlacklist As CheckBox
     Friend WithEvents tmrFlash As Timer
     Friend WithEvents LanguageToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ckboxSaveDataEnabled As CheckBox
     Friend WithEvents lblNoCommTryNumber As Label
     Friend WithEvents AllowEscKeyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label1 As Label
@@ -1087,7 +1184,6 @@ Partial Class Form1
     Friend WithEvents lblBillOfLading As Label
     Friend WithEvents PrintLabelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetupLabelPrinterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Label7 As Label
     Friend WithEvents lblBorkenLocation As Label
     Friend WithEvents btnReclassify As Button
     Friend WithEvents ReprintLabelFromRFIDTagToolStripMenuItem As ToolStripMenuItem
@@ -1097,4 +1193,39 @@ Partial Class Form1
     Friend WithEvents ReProcessMPPsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents UcIndicator1 As SerialPort.ucIndicator
+    Friend WithEvents btnNoTag As Button
+    Friend WithEvents PanelRB1 As Panel
+    Friend WithEvents lblCoreSNLen As Label
+    Friend WithEvents lblCorePNLen As Label
+    Friend WithEvents lblRackBuildDate As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblCoreSN As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents lblCorePN As Label
+    Friend WithEvents tbRackBarcode As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents PanelDebug As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents ckboxSaveDataEnabled As CheckBox
+    Friend WithEvents ckboxOnBlacklist As CheckBox
+    Friend WithEvents lblBBBPN As Label
+    Friend WithEvents lblACDPN As Label
+    Friend WithEvents lblGMPN As Label
+    Friend WithEvents ckboxConnectorBroken As CheckBox
+    Friend WithEvents ckboxHousingBroken As CheckBox
+    Friend WithEvents ckboxWaterIngression As CheckBox
+    Friend WithEvents ckboxNoComm As CheckBox
+    Friend WithEvents ckboxBadDTCs As CheckBox
+    Friend WithEvents ckboxGoodMtr As CheckBox
+    Friend WithEvents ckboxBadMtr As CheckBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents lblBushing As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents PanelBushingInfo As Panel
+    Friend WithEvents lblBushingType As Label
+    Friend WithEvents lblBushingInfo As Label
+    Friend WithEvents lblCFactor As Label
+    Friend WithEvents lblCFactorInfo As Label
 End Class

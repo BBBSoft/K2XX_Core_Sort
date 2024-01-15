@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="300Nm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\300Nm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="300Nm Bushing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\300Nm Bushing.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="500Nm Bushing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\500Nm Bushing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="550Nm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\550Nm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="700Nm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\700Nm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="700Nm Bushing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\700Nm Bushing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rack 59 C-Factor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Rack 59 C-Factor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rack 64 C-Factor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Rack 64 C-Factor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

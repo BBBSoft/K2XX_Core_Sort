@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.Security
 Imports BBB_Printing.K2xxCoreSortLabel
 
 
@@ -95,7 +96,21 @@ Public Class Form1
     Private ACDPN As New List(Of String)
     Private BBBPN As New List(Of String)
 
+    ' Added by Erick Medrano 2024-0110
+
+    Private Buildsheet As New List(Of String)
+
+    ' End Added by Erick medrano 
+
     Private ButtonClicked As String = ""
+
+    ' Added by Erick Medrano 2024-0110
+
+    Dim NoTag As Boolean = False
+
+    Dim S1 As frmSelectBushing = New frmSelectBushing()
+
+    ' End Added by Erick medrano 
 
     ''ToDo: Replace these with Database versions
     'Private DTC1 As Object(,) = {{"1FB", False},
@@ -602,6 +617,7 @@ Public Class Form1
         ' LoadCoreNumbers()
 
         ' Gvars.GetDTCsForK2XX()
+
     End Sub
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -727,7 +743,7 @@ Public Class Form1
         ClearScreen()
         'clear data
 
-        Gvars.ClearMyData
+        Gvars.ClearMyData()
 
         'With Gvars.MyData
         '    .Scan_RFID = 0
@@ -861,9 +877,15 @@ Public Class Form1
     End Sub
 
     Private Sub btnClearProduct_Click(sender As Object, e As EventArgs) Handles btnClearProduct.Click
+
         cboxProducts.SelectedIndex = -1
         cboxProducts.Enabled = True
         PanelK2XX.Enabled = False
+        lblBushing.Visible = False
+        btnNoTag.Visible = False
+        'btnNoTag.Enabled = True
+
+
         MachineState = eMachineState.SelectProduct
 
     End Sub
@@ -1637,6 +1659,11 @@ Public Class Form1
 
         Label4.Text = CtrlKeyDown.ToString
 
+        If cboxProducts.Text = "K2XX BBB" Then
+            btnNoTag.Visible = True
+        End If
+
+
         If btnClearData.Visible = False And EscKeyPressed = True And MachineState <> eMachineState.ScanRackBarcode Then
             btnClearData.Visible = True
         End If
@@ -1667,9 +1694,9 @@ Public Class Form1
 
         If (Gvars.MyData.OnBlackList_Rack And Gvars.MyData.OnBlackList_MPP) Then
             ckboxOnBlacklist.Text = "On Blacklist - Rack & MPP"
-        ElseIf (gVARS.MyData.OnBlackList_Rack) Then
+        ElseIf (Gvars.MyData.OnBlackList_Rack) Then
             ckboxOnBlacklist.Text = "On Blacklist - Rack"
-        ElseIf (gVARS.MyData.OnBlackList_MPP) Then
+        ElseIf (Gvars.MyData.OnBlackList_MPP) Then
             ckboxOnBlacklist.Text = "On Blacklist - MPP"
         Else
             ckboxOnBlacklist.Text = "On Blacklist"
@@ -1737,31 +1764,31 @@ Public Class Form1
                         lblGMPN.Text = " GM PNs:  " + String.Join(",", GMPN.ToArray())
                         lblACDPN.Text = "ACD PNs: " + String.Join(",", ACDPN.ToArray())
                         lblBBBPN.Text = "BBB PNs: " + String.Join(",", BBBPN.ToArray())
-
-                        If (Gvars.ProductType = Gvars.eProductType.T1XX_GM) Then
-                            Gvars.Global_B = BBBPN.Contains("Global_B")
-                            If Gvars.Global_B Then
-                                Gvars.GetDTCsForT1XX_B()
-                            Else
-                                Gvars.GetDTCsForT1XX()
-                            End If
-                        End If
-
-                        'SetMessage("Run Inhale program")
-                        SetMessage(Phrases(3, Language))
-                        btnRunInhale.Enabled = True
-
-                        Gvars.MyData.OnBlackList_Rack = Gvars.CheckBlackList(lblCoreSN.Text.Trim)
-
-                        If Gvars.MyData.OnBlackList_Rack Then
-                            lblCoreSN.BackColor = Color.Maroon
-                            lblCoreSN.ForeColor = Color.Yellow
-                        Else
-                            lblCoreSN.BackColor = Color.DarkGreen
-                            lblCoreSN.ForeColor = Color.White
-                        End If
-                        MachineState = eMachineState.RunInhalePrg
                     End If
+
+                    If (Gvars.ProductType = Gvars.eProductType.T1XX_GM) Then
+                        Gvars.Global_B = BBBPN.Contains("Global_B")
+                        If Gvars.Global_B Then
+                            Gvars.GetDTCsForT1XX_B()
+                        Else
+                            Gvars.GetDTCsForT1XX()
+                        End If
+                    End If
+
+                    'SetMessage("Run Inhale program")
+                    SetMessage(Phrases(3, Language))
+                    btnRunInhale.Enabled = True
+
+                    Gvars.MyData.OnBlackList_Rack = Gvars.CheckBlackList(lblCoreSN.Text.Trim)
+
+                    If Gvars.MyData.OnBlackList_Rack Then
+                        lblCoreSN.BackColor = Color.Maroon
+                        lblCoreSN.ForeColor = Color.Yellow
+                    Else
+                        lblCoreSN.BackColor = Color.DarkGreen
+                        lblCoreSN.ForeColor = Color.White
+                    End If
+                    MachineState = eMachineState.RunInhalePrg
                 End If
             Case eMachineState.RunInhalePrg
 
@@ -2332,7 +2359,33 @@ Public Class Form1
         Throw New Exception("PN not found in lookup table.  PN: " + PN)
         Return ""
     End Function
+    ' Added Erick Medrano 2024-01-12
 
+    Private Function GetLookupValueBBB(CFactor As Integer, Bushing As Integer, CyberSecurity As Integer) As String
+
+        Dim aQuery As String = ""
+
+        aQuery = "SELECT [BuildSheet],[Bushing],[C-Factor],[CyberSecurity] [CS] FROM [EPSData].[dbo].[K2XX_PNInformation] WHERE [ProductType] = 'BBB' AND [Bushing] = @Bushing AND [C-Factor] = @CFactor AND [CyberSecurity] = @CS"
+
+        Dim ds As New BBBLib.SQL.dsDataSet(ConString_EPSData, aQuery, {{"@Bushing", Bushing}, {"@CFactor", CFactor}, {"@CS", CyberSecurity}})
+        BBBLib.SQL.RunSQLQuery(ds)
+        If ds.Failed Then
+            MsgBox("Error reading data from database." + vbCrLf + ds.ExceptionMsg)
+        Else
+            Try
+                Dim dt As DataTable = ds.rtDataSet.Tables(0)
+                For r = 0 To dt.Rows.Count - 1
+                    Buildsheet.Add(dt.Rows(r)("Buildsheet").ToString)
+                Next
+            Catch ex As Exception
+                MsgBox("Error reading data from database." + vbCrLf + ex.ToString)
+            End Try
+
+        End If
+
+    End Function
+
+    ' End Added Erick Medrano 2024-01-12
 
 #End Region
     Private Sub RFIDTagNumberReceived(Data As String, RawData As String)
@@ -3032,7 +3085,17 @@ Public Class Form1
         ElseIf ACD = True Then
             'Bin = "Place RFID tag on MPP" + vbCrLf + GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), 1)
             'Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
-            Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+
+            ' Added by Erick medrano 2024-01-15
+
+            If NoTag Then
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Buildsheet(0), CyberSecurity:=0)
+
+                ' End Added by Erick medrano 2024-01-15
+
+            Else
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+            End If
             'PrinterInfo.Bin = GetLookupValue(ACDPN(0), 0)
             PrinterInfo.Bin = ""
             PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc)
@@ -3066,6 +3129,10 @@ Public Class Form1
             DetermineDispositionIAM = Bin.Replace(PrinterInfo.BBBCorePN.Substring(0, 10), PrinterInfo.BBBCorePN)
         End If
         Label7.Text = Gvars.MyData.Bin
+    End Function
+
+    Private Function GetValidPN_CS(v As String, loc As Integer) As String
+        Throw New NotImplementedException()
     End Function
 
     Private Function T1xxDetermineDispositionOE(ByRef ScrapAll As Boolean) As String
@@ -3313,6 +3380,7 @@ Public Class Form1
             ' Added by Enrique Juarez
             If BBBLib.Func.theComputerName.ToUpper.Trim = "LAP-LJUAREZ" Or
                BBBLib.Func.theComputerName.ToUpper.Trim = "LAM-LJUAREZ" Or
+               BBBLib.Func.theComputerName.ToUpper.Trim = "LAM-LJUAREZ" Or
                BBBLib.Func.theComputerName.ToUpper.Trim = "W10ENG" Then
                 RFIDTagNumberReceived(ans, ans)
             End If
@@ -3492,6 +3560,24 @@ Public Class Form1
 
         Me.Visible = True
 
+
+    End Sub
+
+    Private Sub btnNoTag_Click(sender As Object, e As EventArgs) Handles btnNoTag.Click
+
+        NoTag = True
+
+        If lblBillOfLading.Text = "" Then
+            MsgBox(Phrases(33, Language), vbOKOnly)
+            MachineState = eMachineState.ClearData
+
+        Else
+            S1.ShowDialog()
+            PanelRB1.Enabled = False
+            MachineState = eMachineState.RunInhalePrg
+            PanelBushingInfo.Visible = True
+            btnNoTag.Enabled = False
+        End If
 
     End Sub
 

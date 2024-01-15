@@ -11,7 +11,7 @@
     <AssemblyName>K2XX_Core_Sort</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -68,10 +68,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>520309B378744A56DDB31FEAACCB1918310C437F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>7408409C8F0833898B72044062F7EB3884CE83AE</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>K2XX_Core_Sort_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>K2XX_Core_Sort_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -81,22 +81,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BBBLib">
-      <HintPath>..\DataCollectionAppV2.x\BBBLib\bin\Debug\BBBLib.dll</HintPath>
+      <HintPath>..\DLL\BBBLib.dll</HintPath>
     </Reference>
     <Reference Include="BBB_Printing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BBB_Printing.dll</HintPath>
+      <HintPath>..\DLL\BBB_Printing.dll</HintPath>
     </Reference>
     <Reference Include="DBConString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DBConString.dll</HintPath>
+      <HintPath>..\DLL\DBConString.dll</HintPath>
     </Reference>
     <Reference Include="RFIDReader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Marc SourceCode\K2XX_Core_Sort - Lab\bin\Debug\RFIDReader.dll</HintPath>
+      <HintPath>..\DLL\RFIDReader.dll</HintPath>
     </Reference>
     <Reference Include="SerialPort">
-      <HintPath>..\..\..\..\..\Marc SourceCode\K2XX_Core_Sort - Lab\bin\Debug\SerialPort.dll</HintPath>
+      <HintPath>..\DLL\SerialPort.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -155,6 +155,12 @@
     <Compile Include="frmBrokenHousings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSelectBushing.Designer.vb">
+      <DependentUpon>frmSelectBushing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectBushing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmViewData.Designer.vb">
       <DependentUpon>frmViewData.vb</DependentUpon>
     </Compile>
@@ -167,6 +173,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -196,6 +203,9 @@
     <EmbeddedResource Include="frmBrokenHousings.resx">
       <DependentUpon>frmBrokenHousings.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectBushing.resx">
+      <DependentUpon>frmSelectBushing.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmViewData.resx">
       <DependentUpon>frmViewData.vb</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="K2XX_Core_Sort_1_TemporaryKey.pfx" />
     <None Include="K2XX_Core_Sort_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -225,6 +236,30 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\300Nm Bushing.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\500Nm Bushing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\700Nm Bushing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rack 64 C-Factor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rack 59 C-Factor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\300Nm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\550Nm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\700Nm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
