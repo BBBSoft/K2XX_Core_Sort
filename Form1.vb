@@ -50,7 +50,7 @@ Public Class Form1
                                     {"Place RFID tag on Rack.", "Coloque el RFID en la carcasa"},                                                                                                                                                                                                                                                   ' 15
                                     {"BIN # <Bin#>", "BIN <Bin#>"},                                                                                                                                                                                                                                                                                 ' 16
                                     {"Place Rack in Hold Bin", "Coloque la carcasa en el gaylor Hold"},                                                                                                                                                                                                                                             ' 17
-                                    {"Remove MPP from Rack, Scrap Rack, and place RFID tag on MPP.", "Remover el motor de la carcasa, hacer scrap la carcasa, colocar RFID al motor"},
+                                    {"Remove MPP from Rack, Scrap Rack, and place RFID tag on MPP.", "Remover el motor de la carcasa, hacer scrap la carcasa, colocar RFID al motor"},                                                                                                                                                              ' 18
                                     {"Scrap", "Basura"},
                                     {"Click Clear Data button to continue.", "Seleccione el boton limpiar para continuar"},
                                     {"Data has NOT been saved!" + vbCrLf + "Are you sure you want to clear the Data?", "Los datos no se guardaron!" + vbCrLf + "Estas seguro que quieres continuar los datos?"},
@@ -1469,6 +1469,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnNo3_Click(sender As Object, e As EventArgs) Handles btnNo3.Click
+
         If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
 
         ButtonClicked = "No_3"
@@ -2176,6 +2177,7 @@ Public Class Form1
 
         Dim s As String = Gvars.MyData.Bin
         Dim l As String = ""
+        Dim Loc As Integer = 6
         'If s = "Scrap" Then
         '    lblDisposition.BackColor = Color.Maroon
         '    lblDisposition.ForeColor = Color.Yellow
@@ -2197,43 +2199,10 @@ Public Class Form1
             lblDisposition.ForeColor = Color.Yellow
             lblDisposition.Text += vbCrLf + Phrases(39, Language)
             l = "H"
+
         Else
-            If PartInfo.Contains("Connector Broken") Then
-                If NoTag Then
-                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-                    GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
-                    lblDisposition.BackColor = Color.White
-                    lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + vbCrLf + Phrases(42, Language)
-                    l = "W"
-
-                ElseIf GetLookupValue(ACDPN(0), 4) = "N" Then
-                    lblDisposition.BackColor = Color.White
-                    lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += vbCrLf + Phrases(42, Language)
-                    l = "W"
-
-                Else
-                    lblDisposition.BackColor = Color.Yellow
-                    lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += vbCrLf + Phrases(40, Language)
-                    l = "Y"
-                End If
-            ElseIf PartInfo.Contains("Bad DTCs") Or PartInfo.Contains("No Comm") Or PartInfo.Contains("TRQ Sen DTCs") Then
-                If NoTag Then
-                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-                    lblDisposition.BackColor = Color.Blue
-                    lblDisposition.ForeColor = Color.White
-                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + vbCrLf + Phrases(41, Language)
-                    l = "B"
-                Else
-                    lblDisposition.BackColor = Color.Blue
-                    lblDisposition.ForeColor = Color.White
-                    lblDisposition.Text += vbCrLf + Phrases(41, Language)
-                    l = "B"
-                End If
-
-            ElseIf s.Contains("Remove MPP:") Or s.Contains("Hold") Then
+            'Added Erick Medrano 2024-01-23
+            If s.Contains("Remove MPP:") Or s.Contains("Hold") Then
                 If NoTag Then
                     Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
                     lblDisposition.BackColor = Color.Orange
@@ -2243,33 +2212,100 @@ Public Class Form1
                 Else
                     lblDisposition.BackColor = Color.Orange
                     lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += vbCrLf + Phrases(38, Language)
+                    lblDisposition.Text += Phrases(18, Language)
                     l = "H"
                 End If
-
-                'Else
-                '    lblDisposition.BackColor = Color.Bisque
-                '    lblDisposition.ForeColor = Color.Black
-                '    lblDisposition.Text += vbCrLf + Phrases(37, Language)
-                '    l = "H"
-            Else
+                'End Added by Erick Medrano 2024-01-23
+            ElseIf PartInfo.Contains("Connector Broken") Then
                 If NoTag Then
-                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-                    lblDisposition.BackColor = Color.Green
-                    lblDisposition.ForeColor = Color.White
-                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + vbCrLf + Phrases(14, Language)
-                    l = "C"
+                        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                        GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+                        lblDisposition.BackColor = Color.White
+                        lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CW" + vbCrLf + Phrases(42, Language)
+                    l = "W"
+
+                    ElseIf GetLookupValue(ACDPN(0), 4) = "N" Then
+                        lblDisposition.BackColor = Color.White
+                        lblDisposition.ForeColor = Color.Black
+                        lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "W" + vbCrLf + Phrases(42, Language)
+                        l = "W"
+
+                    Else
+                        lblDisposition.BackColor = Color.Yellow
+                        lblDisposition.ForeColor = Color.Black
+                        lblDisposition.Text += vbCrLf + Phrases(40, Language)
+                        l = "Y"
+                    End If
+
+                    '    'Added Erick Medrano 2024-01-23
+                    'ElseIf s.Contains("Remove MPP:") Or s.Contains("Hold") Then
+                    '    If NoTag Then
+                    '        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    '        lblDisposition.BackColor = Color.Orange
+                    '        lblDisposition.ForeColor = Color.Black
+                    '        lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + vbCrLf + Phrases(38, Language)
+                    '        l = "H"
+                    '    Else
+                    '        lblDisposition.BackColor = Color.Orange
+                    '        lblDisposition.ForeColor = Color.Black
+                    '        lblDisposition.Text += Phrases(18, Language)
+                    '        l = "H"
+                    '    End If
+                    '    'End Added by Erick Medrano 2024-01-23
+
+                ElseIf PartInfo.Contains("Bad DTCs") Or PartInfo.Contains("No Comm") Or PartInfo.Contains("TRQ Sen DTCs") Then
+                    If NoTag Then
+                        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                        lblDisposition.BackColor = Color.Blue
+                        lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB" + vbCrLf + Phrases(41, Language)
+                    l = "B"
+                    Else
+                        lblDisposition.BackColor = Color.Blue
+                        lblDisposition.ForeColor = Color.White
+                        lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "B" + vbCrLf + Phrases(41, Language)
+                        l = "B"
+                    End If
+
+                    'ElseIf s.Contains("Remove MPP:") Or s.Contains("Hold") Then
+                    '    If NoTag Then
+                    '        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    '        lblDisposition.BackColor = Color.Orange
+                    '        lblDisposition.ForeColor = Color.Black
+                    '        lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + vbCrLf + Phrases(38, Language)
+                    '        l = "H"
+                    '    Else
+                    '        lblDisposition.BackColor = Color.Orange
+                    '        lblDisposition.ForeColor = Color.Black
+                    '        lblDisposition.Text += vbCrLf + Phrases(18, Language)
+                    '        l = "H"
+                    '    End If
+
+                    'Else
+                    '    lblDisposition.BackColor = Color.Bisque
+                    '    lblDisposition.ForeColor = Color.Black
+                    '    lblDisposition.Text += vbCrLf + Phrases(37, Language)
+                    '    l = "H"
+
                 Else
-                    lblDisposition.BackColor = Color.Green
-                    lblDisposition.ForeColor = Color.White
-                    lblDisposition.Text += vbCrLf + Phrases(14, Language)
+                    If NoTag Then
+                        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                        lblDisposition.BackColor = Color.Green
+                        lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "C" + vbCrLf + Phrases(14, Language)
                     l = "C"
+                    Else
+                        lblDisposition.BackColor = Color.Green
+                        lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + vbCrLf + Phrases(14, Language)
+                    'l = "C"
                 End If
 
+                End If
             End If
-        End If
 
-        If Not PrinterInfo.GMCorePN Is Nothing Then
+            If Not PrinterInfo.GMCorePN Is Nothing Then
             If PrinterInfo.GMCorePN.EndsWith("C") Then
                 PrinterInfo.GMCorePN += l
                 PrinterInfo.BBBCorePN += l
@@ -3020,6 +3056,7 @@ Public Class Form1
     Private Function DetermineDispositionIAM(ByRef ScrapAll As Boolean) As String
         DetermineDispositionIAM = ""
         Dim Hold As Boolean = False
+        Dim BadDTCFound As Boolean = False
         Dim GM As Boolean = False
         Dim ACD As Boolean = False
         Dim SaveMtr As Boolean = False
@@ -3037,6 +3074,15 @@ Public Class Form1
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
             Gvars.MyData.ScrapMotor = True
+
+            'Added by Erick Medrano 2024-01-23
+        ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            GM = True
+            'End Added by Erick Medrano 2024-01-23
+            'Added by Erick Medrano 2024-01-23
+        ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
+            BadDTCFound = True
+            'End Added by Erick Medrano 2024-01-23
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
             Hold = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound Then
@@ -3044,6 +3090,10 @@ Public Class Form1
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.AllGoodDTCs And Gvars.MyData.ConnectorBroken Then
             GM = True
             'ACD = True
+            'Added by Erick Medrano 2024-01-23
+        ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            GM = True
+            'End Added by Erick Medrano 2024-01-23
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.AllGoodDTCs And Not Gvars.MyData.ConnectorBroken Then
             ACD = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.NoComm And Not Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid Then
@@ -3134,6 +3184,28 @@ Public Class Form1
                 'MyData.Bin = GetLookupValue("Hold", 0) + " - Hold Bin"
                 Gvars.MyData.Bin = "Hold Bin"
             End If
+            'End If
+
+            'If Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm Then
+
+            '    If NoTag Then
+            '        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+            '        Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+
+            '        PrinterInfo.Bin = ""
+            '        PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+            '        PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+            '        Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+            '        ' End Added by Erick medrano 2024-01-15
+
+            '    Else
+            '        Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+            '        PrinterInfo.Bin = ""
+            '        PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc)
+            '        PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc)
+            '        'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+            '        Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
+            '    End If
 
         ElseIf GM = True Then
 
@@ -3146,7 +3218,7 @@ Public Class Form1
                 PrinterInfo.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CW"
                 PrinterInfo.BBBCorePN = ""
                 PrinterInfo.GMCorePN = ""
-                Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+                Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CW"
             Else
                 'Bin = "Place RFID tag on Rack" + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), 1)
                 'Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), Loc)
@@ -3183,34 +3255,59 @@ Public Class Form1
                 'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
                 Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
             End If
+
+        ElseIf BadDTCFound = True Then
+            If Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm Then
+
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+                    ' End Added by Erick medrano 2024-01-15
+
+                Else
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc)
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc)
+                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
+                End If
+            End If
+
             'PrinterInfo.Bin = GetLookupValue(ACDPN(0), 0)
         ElseIf (Gvars.MyData.ScrapHousing = True) And (Gvars.MyData.ScrapMotor = False) Then
 
-            Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
-            'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
-            'Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            'If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
-            Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
-            PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
-            PrinterInfo.BBBCorePN = BBBCorePN
-            'PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
-            PrinterInfo.GMCorePN = ""
-            'MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+                Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
+                'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
+                'Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                'If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
+                Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+                PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
+                PrinterInfo.BBBCorePN = BBBCorePN
+                'PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
+                PrinterInfo.GMCorePN = ""
+                'MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
 
-        ElseIf ScrapAll = True Then
-            Gvars.MyData.Bin = "Scrap"
-            Bin = Phrases(19, Language)
-        Else
-            MsgBox("Error in Desposition routine.")
-            End
-        End If
+            ElseIf ScrapAll = True Then
+                Gvars.MyData.Bin = "Scrap"
+                Bin = Phrases(19, Language)
+            Else
+                MsgBox("Error in Desposition routine.")
+                End
+            End If
 
-        If PrinterInfo.PartInfo <> "" Then SetLabelColorIAM(PrinterInfo.PartInfo)
-        'If Bin.IndexOf("203-0") >= 0 And Not NoTag Then
+            If PrinterInfo.PartInfo <> "" Then SetLabelColorIAM(PrinterInfo.PartInfo)
+        'If Bin.IndexOf("203-0") >= 0 And Not NoTag And Not Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm And Not Gvars.MyData.AcceptableDTCs Then
         '    DetermineDispositionIAM = Bin.Replace(PrinterInfo.BBBCorePN.Substring(1, 10), PrinterInfo.BBBCorePN)
         'End If
+
         Label7.Text = Gvars.MyData.Bin
     End Function
 
