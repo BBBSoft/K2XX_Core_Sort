@@ -25,9 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\192.168.1.32\AM-FileShare\Applications\EPS_DataCollection\K2XX\Core Sort\</InstallUrl>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,6 +81,9 @@
   <ItemGroup>
     <Reference Include="BBBLib">
       <HintPath>..\DLL\BBBLib.dll</HintPath>
+    </Reference>
+    <Reference Include="BBBLib_Rey">
+      <HintPath>..\BBBLib_Rey\BBBLib\bin\Debug\BBBLib_Rey.dll</HintPath>
     </Reference>
     <Reference Include="BBB_Printing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

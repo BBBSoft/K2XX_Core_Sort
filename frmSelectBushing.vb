@@ -43,6 +43,9 @@
         Form1.lblMessage.ForeColor = Color.White
         Form1.lblBushingInfo.Text = "700"
         Form1.lblCFactorInfo.Text = "64"
+        btn300Nm.Enabled = True
+        btn550Nm.Enabled = True
+        btn700Nm.Enabled = True
 
     End Sub
 
@@ -54,6 +57,9 @@
         Form1.lblMessage.ForeColor = Color.White
         Form1.lblBushingInfo.Text = "700"
         Form1.lblCFactorInfo.Text = "59"
+        btn300Nm.Enabled = True
+        btn550Nm.Enabled = True
+        btn700Nm.Enabled = True
 
     End Sub
 End Class
