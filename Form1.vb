@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Net.Security
+Imports System.Windows.Forms.VisualStyles
 Imports BBB_Printing.K2xxCoreSortLabel
 Imports BBBLib
 Imports BBBLib_Rey
@@ -70,13 +71,16 @@ Public Class Form1
                                     {"Enter Bill of lading number.", "Ingres número de BOL de embarque."},
                                     {"Reclassify parts", "Reclasificar unidad"},
                                     {"Are you sure you want to reclassifiy parts?", "¿Seguro que quieres reclasificar unidades?"},
-                                    {"Manila Tag", "Etiqueta Manila"},      '37
-                                    {"Orange Tag", "Etiqueta Naranja"},     '38
-                                    {"Red Tag", "Etiqueta Roja"},           '39
-                                    {"Yellow Tag", "Etiqueta Amarillo"},    '40
-                                    {"Blue Tag", "Etiqueta Azul"},          '41
-                                    {"White Tag", "Etiqueta Blanca"}}       '42
-
+                                    {"Manila Tag", "Etiqueta Manila"},                                  '37
+                                    {"Orange Tag", "Etiqueta Naranja"},                                 '38
+                                    {"Red Tag", "Etiqueta Roja"},                                       '39
+                                    {"Yellow Tag", "Etiqueta Amarillo"},                                '40
+                                    {"Blue Tag", "Etiqueta Azul"},                                      '41
+                                    {"White Tag", "Etiqueta Blanca"},                                   '42
+                                    {"Black Tag", "Etiqueta Negra"},                                    '43
+                                    {"Pinion with Corrosion??", "Piñón con Corrosion?"},                '44
+                                    {"Bent Pinion?", "Piñón Pandeado?"},                                '45
+                                    {"Pinion Sensor Conn Broken?", "Conector del piñón Quebrado?"}}     '46
     Private NoComCountMin As Integer = 3
 
     Private HideDebug As Boolean = True
@@ -459,6 +463,9 @@ Public Class Form1
         lblQ1.Text = Phrases(7, Language)
         lblQ2.Text = Phrases(8, Language)
         lblQ3.Text = Phrases(9, Language)
+        lblQ4.Text = Phrases(44, Language)
+        lblQ5.Text = Phrases(45, Language)
+        lblQ6.Text = Phrases(46, Language)
         btnChangeBoL.Text = Phrases(30, Language)
         Label1.Text = Phrases(32, Language)
         btnReclassify.Text = Phrases(35, Language)
@@ -852,6 +859,10 @@ Public Class Form1
         lblCorePN.Text = ""
         lblCorePNLen.Text = ""
 
+        lblBushingInfo.Text = ""
+        lblCFactorInfo.Text = ""
+
+
         lblCoreSN.Text = ""
         lblCoreSNLen.Text = ""
         lblCoreSN.BackColor = Color.White
@@ -863,6 +874,12 @@ Public Class Form1
 
         PanelQ3.Enabled = False
 
+        btnYes6.BackColor = Color.Gainsboro
+        btnNo6.BackColor = Color.Gainsboro
+        btnYes5.BackColor = Color.Gainsboro
+        btnNo5.BackColor = Color.Gainsboro
+        btnYes4.BackColor = Color.Gainsboro
+        btnNo4.BackColor = Color.Gainsboro
         btnYes3.BackColor = Color.Gainsboro
         btnNo3.BackColor = Color.Gainsboro
         btnYes1.BackColor = Color.Gainsboro
@@ -889,6 +906,9 @@ Public Class Form1
         PanelQ1.BackColor = Reset_BackColor
         PanelQ2.BackColor = Reset_BackColor
         PanelQ3.BackColor = Reset_BackColor
+        PanelQ4.BackColor = Reset_BackColor
+        PanelQ5.BackColor = Reset_BackColor
+        PanelQ6.BackColor = Reset_BackColor
         PanelRFID.BackColor = Reset_BackColor
         PanelInhale.BackColor = Reset_BackColor
 
@@ -907,6 +927,7 @@ Public Class Form1
         PanelK2XX.Enabled = False
         lblBushing.Visible = False
         btnNoTag.Visible = False
+        PanelBushingInfo.Visible = False
         'btnNoTag.Enabled = True
 
 
@@ -927,6 +948,7 @@ Public Class Form1
             lblCFactorInfo.Text = ""
             btnNoTag.Enabled = True
             frmSelectBushing.Enabled = True
+            PanelBushingInfo.Visible = False
             'End Added Erick Medrano 2024-01-15
 
             'ElseIf MsgBox("Data has NOT been saved!" + vbCrLf + "Are you sure you want to clear the Data?", vbYesNo) = vbYes Then
@@ -1142,7 +1164,7 @@ Public Class Form1
         Gvars.InhalePrg.Completed = False
 
         'Run App
-        Dialogs.Dialog(Me,"",Dialogs.MessageType.Warning,5,14)
+        Dialogs.Dialog(Me, "", Dialogs.MessageType.Warning, 5, 14)
         BGW.RunWorkerAsync()
 
         'Set wait for return Flag
@@ -1454,8 +1476,19 @@ Public Class Form1
         'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
         'MyData.WaterIngression = False
         'MyData.WaterIngressionValid = True
-        PanelQ3.Enabled = True
-        PanelQ3.BackColor = HighLightBackColor
+
+        ' Added by Erick Medrano 2024-04-18
+
+        If (cboxProducts.Text = "K2XX BBB") Then
+            PanelQ4.Enabled = True
+            PanelQ4.BackColor = HighLightBackColor
+        Else
+            PanelQ3.Enabled = True
+            PanelQ3.BackColor = HighLightBackColor
+        End If
+
+        ' End Add
+
         'End If
 
         ClearDisposition()
@@ -1475,8 +1508,20 @@ Public Class Form1
         'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
         'MyData.WaterIngression = False
         'MyData.WaterIngressionValid = True
-        PanelQ3.Enabled = True
-        PanelQ3.BackColor = HighLightBackColor
+
+        ' Added by Erick Medrano 2024-04-18
+
+        If (cboxProducts.Text = "K2XX BBB") Then
+            PanelQ4.Enabled = True
+            PanelQ4.BackColor = HighLightBackColor
+        Else
+            PanelQ3.Enabled = True
+            PanelQ3.BackColor = HighLightBackColor
+        End If
+
+        ' End Add
+
+
         'End If
 
         ClearDisposition()
@@ -1766,6 +1811,9 @@ Public Class Form1
                 If PanelQ1.Enabled Then PanelQ1.Enabled = False
                 If PanelQ2.Enabled Then PanelQ2.Enabled = False
                 If PanelQ3.Enabled Then PanelQ3.Enabled = False
+                If PanelQ4.Enabled Then PanelQ4.Enabled = False
+                If PanelQ5.Enabled Then PanelQ5.Enabled = False
+                If PanelQ6.Enabled Then PanelQ6.Enabled = False
                 If Not tbRackBarcode.Focused Then tbRackBarcode.Focus()
                 'SetMessage("Scan Rack Barcode.")
                 SetMessage(Phrases(2, Language))
@@ -1968,24 +2016,52 @@ Public Class Form1
 
                     Dim PartInfo As String = ""
 
+                    'Added by Erick Medrano 2024-04-18
+
+                    szSection = "Check for Housing Broken"
+                    If Gvars.MyData.HousingBroken Then
+                        If PartInfo.Length > 0 Then PartInfo += ", "
+                        If Gvars.MyData.HousingBrokenLocation = "Yoke" Or Gvars.MyData.HousingBrokenLocation = "Center" Or Gvars.MyData.HousingBrokenLocation = "Both" Then
+                            PartInfo += Gvars.MyData.HousingBrokenLocation + "SideBroken"
+                        End If
+                    End If
+
+                    szSection = "Check for Pinion Damaged"
+                    If Gvars.MyData.CorrosionPinion Then
+                        If PartInfo.Length > 0 Then PartInfo += ", "
+                        PartInfo += "CorrosionPin"
+                    End If
+                    szSection = "Check for Pinion Damaged"
+                    If Gvars.MyData.BentPinion Then
+                        If PartInfo.Length > 0 Then PartInfo += ", "
+                        PartInfo += "BentPinion"
+                    End If
+                    szSection = "Check for Pinion Damaged"
+                    If Gvars.MyData.ConnectorPinion Then
+                        If PartInfo.Length > 0 Then PartInfo += ", "
+                        PartInfo += "ConnPinion"
+                    End If
+
+                    ' End Add
+
                     szSection = "Check for DTCs or NoComm"
                     If Gvars.MyData.NoComm Then
                         If PartInfo.Length > 0 Then PartInfo += ", "
-                        PartInfo += "No Comm"
+                        PartInfo += "NoComm"
                     ElseIf (Gvars.MyData.BadDTCFound) Then
                         If PartInfo.Length > 0 Then PartInfo += ", "
-                        PartInfo += "Bad DTCs"
+                        PartInfo += "BadDTCs"
                     End If
 
                     If Gvars.MyData.SpecialCaseDTCs Then
                         If PartInfo.Length > 0 Then PartInfo += ", "
-                        PartInfo += "TRQ Sen DTCs"
+                        PartInfo += "TRQSenDTCs"
                     End If
 
                     szSection = "Check for Connector Broken"
                     If Gvars.MyData.ConnectorBroken Then
                         If PartInfo.Length > 0 Then PartInfo += ", "
-                        PartInfo += "Connector Broken"
+                        PartInfo += "ConnBroken"
                     End If
 
                     szSection = "Setup Printer Label"
@@ -2241,20 +2317,172 @@ Public Class Form1
 
         Else
             'Added Erick Medrano 2024-01-23
-            If s.Contains("Remove MPP:") Or s.Contains("Hold") Then
+            'If s.Contains("Remove MPP:") Or s.Contains("Hold") Then
+            '    If NoTag Then
+            '        lblDisposition.BackColor = Color.Orange
+            '        lblDisposition.ForeColor = Color.Black
+            '        lblDisposition.Text += Phrases(18, Language)
+            '        l = "H"
+            '    Else
+            '        lblDisposition.BackColor = Color.Orange
+            '        lblDisposition.ForeColor = Color.Black
+            '        lblDisposition.Text += Phrases(18, Language)
+            '        l = "H"
+            '    End If
+
+            'Added Erick Medrano 2024-01-23
+            If PartInfo.Equals("") Then
                 If NoTag Then
-                    lblDisposition.BackColor = Color.Orange
-                    lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += Phrases(18, Language)
-                    l = "H"
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Green
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "C" + vbCrLf + Phrases(14, Language)
+                    l = "C"
                 Else
-                    lblDisposition.BackColor = Color.Orange
-                    lblDisposition.ForeColor = Color.Black
-                    lblDisposition.Text += Phrases(18, Language)
-                    l = "H"
+                    lblDisposition.BackColor = Color.Green
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + vbCrLf + Phrases(14, Language)
+                    'l = "C"
                 End If
+
+            ElseIf PartInfo.Equals("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+                    lblDisposition.BackColor = Color.White
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CW" + vbCrLf + Phrases(42, Language)
+                    l = "W"
+
+                Else
+                    lblDisposition.BackColor = Color.White
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "W" + vbCrLf + Phrases(42, Language)
+                    l = "W"
+                End If
+            ElseIf PartInfo.Contains(Gvars.MyData.HousingBrokenLocation) Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Contains(Gvars.MyData.HousingBrokenLocation) And PartInfo.Equals("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("CorrosionPin") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("CorrosionPin") And PartInfo.Equals("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("BentPinion") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("BentPinion") And PartInfo.Equals("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("ConnPinion") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Equals("ConnPinion") And PartInfo.Equals("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+
+                ' End Add 
+
+            ElseIf PartInfo.Equals("ConnBroken") And PartInfo.Equals("BadDTCs") Or PartInfo.Equals("TRQSenDTCs") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+
                 'End Added by Erick Medrano 2024-01-23
-            ElseIf PartInfo.Contains("Connector Broken") Then
+            ElseIf PartInfo.Equals("ConnBroken") Then
                 If NoTag Then
                     Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
                     GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
@@ -2292,7 +2520,7 @@ Public Class Form1
                 '    End If
                 '    'End Added by Erick Medrano 2024-01-23
 
-            ElseIf PartInfo.Contains("Bad DTCs") Or PartInfo.Contains("No Comm") Or PartInfo.Contains("TRQ Sen DTCs") Then
+            ElseIf PartInfo.Equals("NoComm") Then
                 If NoTag Then
                     Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
                     lblDisposition.BackColor = Color.Blue
@@ -2305,6 +2533,37 @@ Public Class Form1
                     lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "B" + vbCrLf + Phrases(41, Language)
                     l = "B"
                 End If
+
+                'Added By Erick Medrano 2024-04-17
+
+            ElseIf PartInfo.Equals("BadDTCs") Or PartInfo.Equals("TRQSenDTCs") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+
+                'ElseIf PartInfo.Contains("TRQ Sen DTCs") Then
+                '    If NoTag Then
+                '        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                '        lblDisposition.BackColor = Color.Black
+                '        lblDisposition.ForeColor = Color.White
+                '        lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                '        l = "BL"
+                '    Else
+                '        lblDisposition.BackColor = Color.Black
+                '        lblDisposition.ForeColor = Color.White
+                '        lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                '        l = "BL"
+                '    End If
+                ' End Add
 
                 'ElseIf s.Contains("Remove MPP:") Or s.Contains("Hold") Then
                 '    If NoTag Then
@@ -2341,6 +2600,7 @@ Public Class Form1
                 End If
             End If
         End If
+
         If Not PrinterInfo.GMCorePN Is Nothing Then
             If PrinterInfo.GMCorePN.EndsWith("C") Then
                 PrinterInfo.GMCorePN += l
@@ -2694,19 +2954,22 @@ Public Class Form1
             aQuery += "[UnacceptableDTCs]=@42, "
             aQuery += "[BrokenHousing]=@43, "
             aQuery += "[ConnectorsBroken]=@44, "
-            aQuery += "[WaterIngressionValid]=@45, "
-            aQuery += "[WaterIngression]=@46, "
-            aQuery += "[GMPN]=@47, "
-            aQuery += "[ACDPN]=@48, "
-            aQuery += "[BBBPN]=@49, "
-            aQuery += "[BIN]=@50, "
-            aQuery += "[ScrapHousing]=@51, "
-            aQuery += "[ScrapMotor]=@52,"
-            aQuery += "[OnBlacklist_Rack]=@53,"
-            aQuery += "[OnBlacklist_MPP]=@54,"
-            aQuery += "[TestData]=@55,"
-            aQuery += "[BillOfLading]=@56,"
-            aQuery += "[BrokenHousingLoc]=@57 "
+            aQuery += "[CorrosionPinion]=@45, "
+            aQuery += "[BentPinion]=@46, "
+            aQuery += "[ConnPinBroken]=@47, "
+            aQuery += "[WaterIngressionValid]=@48, "
+            aQuery += "[WaterIngression]=@49, "
+            aQuery += "[GMPN]=@50, "
+            aQuery += "[ACDPN]=@51, "
+            aQuery += "[BBBPN]=@52, "
+            aQuery += "[BIN]=@53, "
+            aQuery += "[ScrapHousing]=@54, "
+            aQuery += "[ScrapMotor]=@55,"
+            aQuery += "[OnBlacklist_Rack]=@56,"
+            aQuery += "[OnBlacklist_MPP]=@57,"
+            aQuery += "[TestData]=@58,"
+            aQuery += "[BillOfLading]=@59,"
+            aQuery += "[BrokenHousingLoc]=@60 "
             aQuery += "WHERE idx=@idx AND [Status]=1"
 
             '([RackBarCode],[CorePN],[CoreSN],[BuildDate],[SoftwareVersion1],[SoftwareVersion2],[SoftwareVersion3]"
@@ -2761,19 +3024,22 @@ Public Class Form1
                                        {"@42", Gvars.MyData.UnacceptableDTCs},
                                        {"@43", Gvars.MyData.HousingBroken.ToString},
                                        {"@44", Gvars.MyData.ConnectorBroken.ToString},
-                                       {"@45", Gvars.MyData.WaterIngressionValid.ToString},
-                                       {"@46", Gvars.MyData.WaterIngression.ToString},
-                                       {"@47", String.Join(",", GMPN.ToArray())},
-                                       {"@48", String.Join(",", ACDPN.ToArray())},
-                                       {"@49", String.Join(",", BBBPN.ToArray())},
-                                       {"@50", Gvars.MyData.Bin},
-                                       {"@51", Gvars.MyData.ScrapHousing.ToString},
-                                       {"@52", Gvars.MyData.ScrapMotor.ToString},
-                                       {"@53", Gvars.MyData.OnBlackList_Rack.ToString},
-                                       {"@54", Gvars.MyData.OnBlackList_MPP.ToString},
-                                       {"@55", PanelDebug.Visible},
-                                       {"@56", Gvars.MyData.BoL},
-                                       {"@57", Gvars.MyData.HousingBrokenLocation},
+                                       {"@45", Gvars.MyData.CorrosionPinion.ToString},
+                                       {"@46", Gvars.MyData.BentPinion.ToString},
+                                       {"@47", Gvars.MyData.ConnectorPinion.ToString},
+                                       {"@48", Gvars.MyData.WaterIngressionValid.ToString},
+                                       {"@49", Gvars.MyData.WaterIngression.ToString},
+                                       {"@50", String.Join(",", GMPN.ToArray())},
+                                       {"@51", String.Join(",", ACDPN.ToArray())},
+                                       {"@52", String.Join(",", BBBPN.ToArray())},
+                                       {"@53", Gvars.MyData.Bin},
+                                       {"@54", Gvars.MyData.ScrapHousing.ToString},
+                                       {"@55", Gvars.MyData.ScrapMotor.ToString},
+                                       {"@56", Gvars.MyData.OnBlackList_Rack.ToString},
+                                       {"@57", Gvars.MyData.OnBlackList_MPP.ToString},
+                                       {"@58", PanelDebug.Visible},
+                                       {"@59", Gvars.MyData.BoL},
+                                       {"@60", Gvars.MyData.HousingBrokenLocation},
                                        {"@idx", Gvars.MyData.RFID_Idx}}
 
             Dim ds As New BBBLib.SQL.dsDataSet(ConString_EPSData, aQuery, Params)
@@ -3091,6 +3357,7 @@ Public Class Form1
         DetermineDispositionIAM = ""
         Dim Hold As Boolean = False
         Dim BadDTCFound As Boolean = False
+        Dim PinionBad As Boolean = False
         Dim GM As Boolean = False
         Dim ACD As Boolean = False
         Dim SaveMtr As Boolean = False
@@ -3110,13 +3377,37 @@ Public Class Form1
             Gvars.MyData.ScrapMotor = True
 
             'Added by Erick Medrano 2024-01-23
-        ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
-            GM = True
+            'ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            '    GM = True
             'End Added by Erick Medrano 2024-01-23
             'Added by Erick Medrano 2024-01-23
         ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
             BadDTCFound = True
             'End Added by Erick Medrano 2024-01-23
+
+            'Added by Erick Medrano 2024-04-18
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.CorrosionPinion And Gvars.MyData.AllGoodDTCs And Not Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.CorrosionPinion And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.CorrosionPinion And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.BentPinion And Gvars.MyData.AllGoodDTCs And Not Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.BentPinion And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.BentPinion And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.ConnectorPinion And Gvars.MyData.AllGoodDTCs And Not Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.ConnectorPinion And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+        ElseIf cboxProducts.Text = "K2XX BBB" And Gvars.MyData.ConnectorPinion And Gvars.MyData.ConnectorBroken Then
+            PinionBad = True
+
+            'End Add
+
+
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
             Hold = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound Then
@@ -3125,15 +3416,40 @@ Public Class Form1
             GM = True
             'ACD = True
             'Added by Erick Medrano 2024-01-23
-        ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
-            GM = True
+            'ElseIf cboxProducts.Text = "K2XX BBB" And Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            '    GM = True
             'End Added by Erick Medrano 2024-01-23
+
+            'Added by Erick Medrano 2024-04-18
+
+        ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            BadDTCFound = True
+        ElseIf Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            BadDTCFound = True
+        ElseIf Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs And Gvars.MyData.ConnectorBroken Then
+            BadDTCFound = True
+
+
+
+            'End Add
+
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.AllGoodDTCs And Not Gvars.MyData.ConnectorBroken Then
             ACD = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.NoComm And Not Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid Then
             GM = True
-        ElseIf Gvars.MyData.HousingBroken And (Not Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
+            'ElseIf Gvars.MyData.HousingBroken And (Not Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
+            '    Gvars.MyData.ScrapHousing = True
+
+            'Added by Erick Medrano
+
+        ElseIf Gvars.MyData.HousingBroken And Gvars.MyData.SpecialCaseDTCs Then
+            BadDTCFound = True
+        ElseIf Not Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid Then
             Gvars.MyData.ScrapHousing = True
+
+
+
+
         Else
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
@@ -3256,13 +3572,13 @@ Public Class Form1
             Else
                 'Bin = "Place RFID tag on Rack" + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), 1)
                 'Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), Loc)
-                Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), Loc)
+                Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), Loc) + "W"
                 'PrinterInfo.Bin = GetLookupValue(GMPN(0), 0)
                 PrinterInfo.Bin = ""
-                PrinterInfo.BBBCorePN = GetLookupValue(GMPN(0), Loc)
-                PrinterInfo.GMCorePN = GetLookupValue(GMPN(0), Loc)
+                PrinterInfo.BBBCorePN = GetLookupValue(GMPN(0), Loc) + "W"
+                PrinterInfo.GMCorePN = GetLookupValue(GMPN(0), Loc) + "W"
                 'MyData.Bin = GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), Loc)
-                Gvars.MyData.Bin = GetLookupValue(GMPN(0), Loc)
+                Gvars.MyData.Bin = GetLookupValue(GMPN(0), Loc) + "W"
             End If
 
         ElseIf ACD = True Then
@@ -3290,8 +3606,29 @@ Public Class Form1
                 Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
             End If
 
-        ElseIf BadDTCFound = True Then
-            If Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm Then
+        ElseIf PinionBad = True Then
+
+            If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    ' End Added by Erick medrano 2024-01-15
+
+                Else
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
+                End If
+
+            ElseIf BadDTCFound = True Then
+            If Gvars.MyData.NoComm Then
 
                 If NoTag Then
                     Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
@@ -3304,64 +3641,113 @@ Public Class Form1
                     ' End Added by Erick medrano 2024-01-15
 
                 Else
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "B"
                     PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc)
-                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc)
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "B"
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "B"
                     'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
-                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "B"
+                End If
+
+                'Added by Erick Medrano 2024-04-18
+
+            ElseIf Gvars.MyData.BadDTCFound Or Gvars.MyData.SpecialCaseDTCs Then
+
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    ' End Added by Erick medrano 2024-01-15
+
+                Else
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
                 End If
             End If
+
+
+
+            'ElseIf Gvars.MyData.SpecialCaseDTCs Then
+            '    If NoTag Then
+            '        Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+            '        Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+
+            '        PrinterInfo.Bin = ""
+            '        PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+            '        PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+            '        Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+            '        ' End Added by Erick medrano 2024-01-15
+
+            '    Else
+            '        Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc)
+            '        PrinterInfo.Bin = ""
+            '        PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc)
+            '        PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc)
+            '        'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+            '        Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc)
+            '    End If
+            ' Added by Erick Medrano 2024-04-17
+
+            ' End Add
 
             'PrinterInfo.Bin = GetLookupValue(ACDPN(0), 0)
 
 
         ElseIf (Gvars.MyData.ScrapHousing = True) And (Gvars.MyData.ScrapMotor = False) Then
 
-            '***********************************************************************************************************************************************************
-            '*
-            '*                                                              PENDITE MODIFICAR
-            '*
-            '***********************************************************************************************************************************************************
+                ' Added by Erick Medrano 2024-04-18
 
-            'If NoTag Then
-            '    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-            '    Dim BBBCorePN As String = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
-            '    Bin = Phrases(18, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), 0) + "-" + BBBCorePN
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
 
-            '    PrinterInfo.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), 0)
-            '    PrinterInfo.BBBCorePN = BBBCorePN
-            '    PrinterInfo.GMCorePN = ""
-            '    Gvars.MyData.Bin = "Remove MPP: " + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), 0) + " - " + BBBCorePN
+                PrinterInfo.Bin = ""
+                PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                    ' End Added by Erick medrano 2024-01-15
 
-            '***********************************************************************************************************************************************************
-            '*
-            '*                                                              PENDITE MODIFICAR
-            '*
-            '***********************************************************************************************************************************************************
+                Else
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.Bin = ""
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
+                End If
 
-            Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
-            'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
-            'Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            'If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
-            Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
-            PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
-            PrinterInfo.BBBCorePN = BBBCorePN
-            'PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            'If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
-            PrinterInfo.GMCorePN = ""
-            'MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-            Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+                ' End Add
 
-        ElseIf ScrapAll = True Then
-            Gvars.MyData.Bin = "Scrap"
+                'Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
+                ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
+                ''Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                ''If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
+                'Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+                'PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
+                'PrinterInfo.BBBCorePN = BBBCorePN
+                ''PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
+                'PrinterInfo.GMCorePN = ""
+                ''MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+                'Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+
+            ElseIf ScrapAll = True Then
+                Gvars.MyData.Bin = "Scrap"
                 Bin = Phrases(19, Language)
             Else
                 MsgBox("Error in Desposition routine.")
                 End
             End If
 
-            If PrinterInfo.PartInfo <> "" Then SetLabelColorIAM(PrinterInfo.PartInfo)
+        'If PrinterInfo.PartInfo <> "" Then SetLabelColorIAM(PrinterInfo.PartInfo)
         'If Bin.IndexOf("203-0") >= 0 And Not NoTag And Not Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm And Not Gvars.MyData.AcceptableDTCs Then
         '    DetermineDispositionIAM = Bin.Replace(PrinterInfo.BBBCorePN.Substring(1, 10), PrinterInfo.BBBCorePN)
         'End If
@@ -3692,14 +4078,14 @@ Public Class Form1
 
         'If Bin.ToUpper.Contains("BIN # 1") Or Bin.ToUpper.Contains("BIN # 2") Then
         If HasBadDTCs.Trim.ToUpper = "TRUE" Then
-                If PartInfo.Length > 0 Then PartInfo += ", "
-                PartInfo += "Bad DTCs"
-            End If
+            If PartInfo.Length > 0 Then PartInfo += ", "
+            PartInfo += "BadDTCs"
+        End If
 
             If BrokenConnector.Trim.ToUpper = "TRUE" Then
-                If PartInfo.Length > 0 Then PartInfo += ", "
-                PartInfo += "Connector Broken"
-            End If
+            If PartInfo.Length > 0 Then PartInfo += ", "
+            PartInfo += "ConnBroken"
+        End If
 
         'End If
         SetupPrintLabel()
@@ -3823,5 +4209,142 @@ Public Class Form1
         End If
 
     End Sub
+    ' Added by Erick Medrano 2024-04-18
+    Private Sub btnYes4_Click(sender As Object, e As EventArgs) Handles btnYes4.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
 
+        ButtonClicked = "Yes_4"
+        PanelQ4.BackColor = Reset_BackColor
+
+        btnYes4.BackColor = ButtonColorSelected
+        btnNo4.BackColor = ButtonColorUnselected
+        Gvars.MyData.CorrosionPinion = True
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ5.Enabled = True
+        PanelQ5.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
+
+    Private Sub btnNo4_Click(sender As Object, e As EventArgs) Handles btnNo4.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
+
+        ButtonClicked = "No_4"
+        PanelQ4.BackColor = Reset_BackColor
+
+        btnYes4.BackColor = ButtonColorUnselected
+        btnNo4.BackColor = ButtonColorSelected
+        Gvars.MyData.CorrosionPinion = False
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ5.Enabled = True
+        PanelQ5.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
+
+    Private Sub btnYes5_Click(sender As Object, e As EventArgs) Handles btnYes5.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
+
+        ButtonClicked = "Yes_5"
+        PanelQ5.BackColor = Reset_BackColor
+
+        btnYes5.BackColor = ButtonColorSelected
+        btnNo5.BackColor = ButtonColorUnselected
+        Gvars.MyData.BentPinion = True
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ6.Enabled = True
+        PanelQ6.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
+
+    Private Sub btnNo5_Click(sender As Object, e As EventArgs) Handles btnNo5.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
+
+        ButtonClicked = "No_5"
+        PanelQ5.BackColor = Reset_BackColor
+
+        btnYes5.BackColor = ButtonColorUnselected
+        btnNo5.BackColor = ButtonColorSelected
+        Gvars.MyData.BentPinion = False
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ6.Enabled = True
+        PanelQ6.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
+
+    Private Sub btnYes6_Click(sender As Object, e As EventArgs) Handles btnYes6.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
+
+        ButtonClicked = "Yes_6"
+        PanelQ6.BackColor = Reset_BackColor
+
+        btnYes6.BackColor = ButtonColorSelected
+        btnNo6.BackColor = ButtonColorUnselected
+        Gvars.MyData.ConnectorPinion = True
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ3.Enabled = True
+        PanelQ3.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
+
+    Private Sub btnNo6_Click(sender As Object, e As EventArgs) Handles btnNo6.Click
+        If MachineState >= eMachineState.GetRFIDIdx Then Exit Sub
+
+        ButtonClicked = "No_6"
+        PanelQ6.BackColor = Reset_BackColor
+
+        btnYes6.BackColor = ButtonColorUnselected
+        btnNo6.BackColor = ButtonColorSelected
+        Gvars.MyData.ConnectorPinion = False
+        btnRunInhale.Enabled = False
+
+        'If (MyData.NoComm Or Gvars.MyData.HousingBroken) And (PanelQ3.Enabled = False) Then
+        'MyData.WaterIngression = False
+        'MyData.WaterIngressionValid = True
+
+        PanelQ3.Enabled = True
+        PanelQ3.BackColor = HighLightBackColor
+
+        'End If
+
+        ClearDisposition()
+    End Sub
 End Class

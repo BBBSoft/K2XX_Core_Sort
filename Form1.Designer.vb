@@ -57,6 +57,18 @@ Partial Class Form1
         Me.msMsg = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnClearProduct = New System.Windows.Forms.Button()
         Me.PanelK2XX = New System.Windows.Forms.Panel()
+        Me.PanelQ6 = New System.Windows.Forms.Panel()
+        Me.lblQ6 = New System.Windows.Forms.Label()
+        Me.btnYes6 = New System.Windows.Forms.Button()
+        Me.btnNo6 = New System.Windows.Forms.Button()
+        Me.PanelQ5 = New System.Windows.Forms.Panel()
+        Me.lblQ5 = New System.Windows.Forms.Label()
+        Me.btnYes5 = New System.Windows.Forms.Button()
+        Me.btnNo5 = New System.Windows.Forms.Button()
+        Me.PanelQ4 = New System.Windows.Forms.Panel()
+        Me.lblQ4 = New System.Windows.Forms.Label()
+        Me.btnYes4 = New System.Windows.Forms.Button()
+        Me.btnNo4 = New System.Windows.Forms.Button()
         Me.PanelBushingInfo = New System.Windows.Forms.Panel()
         Me.lblCFactorInfo = New System.Windows.Forms.Label()
         Me.lblBushingInfo = New System.Windows.Forms.Label()
@@ -122,6 +134,9 @@ Partial Class Form1
         Me.Panel4.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelK2XX.SuspendLayout()
+        Me.PanelQ6.SuspendLayout()
+        Me.PanelQ5.SuspendLayout()
+        Me.PanelQ4.SuspendLayout()
         Me.PanelBushingInfo.SuspendLayout()
         Me.PanelInhale.SuspendLayout()
         Me.PanelRFID.SuspendLayout()
@@ -163,10 +178,11 @@ Partial Class Form1
         '
         Me.lblQ2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblQ2.Location = New System.Drawing.Point(-1, 0)
+        Me.lblQ2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQ2.Location = New System.Drawing.Point(0, 2)
         Me.lblQ2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblQ2.Name = "lblQ2"
-        Me.lblQ2.Size = New System.Drawing.Size(281, 60)
+        Me.lblQ2.Size = New System.Drawing.Size(235, 25)
         Me.lblQ2.TabIndex = 10
         Me.lblQ2.Text = "Are connectors broken?"
         Me.lblQ2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -175,10 +191,11 @@ Partial Class Form1
         '
         Me.lblQ1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblQ1.Location = New System.Drawing.Point(-1, -1)
+        Me.lblQ1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQ1.Location = New System.Drawing.Point(0, 2)
         Me.lblQ1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblQ1.Name = "lblQ1"
-        Me.lblQ1.Size = New System.Drawing.Size(281, 60)
+        Me.lblQ1.Size = New System.Drawing.Size(210, 23)
         Me.lblQ1.TabIndex = 11
         Me.lblQ1.Text = "Is the housing broken?"
         Me.lblQ1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -187,10 +204,11 @@ Partial Class Form1
         '
         Me.btnYes1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnYes1.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnYes1.Location = New System.Drawing.Point(288, 24)
+        Me.btnYes1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes1.Location = New System.Drawing.Point(310, 1)
         Me.btnYes1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnYes1.Name = "btnYes1"
-        Me.btnYes1.Size = New System.Drawing.Size(71, 31)
+        Me.btnYes1.Size = New System.Drawing.Size(65, 27)
         Me.btnYes1.TabIndex = 12
         Me.btnYes1.Text = "Yes"
         Me.btnYes1.UseVisualStyleBackColor = False
@@ -199,10 +217,11 @@ Partial Class Form1
         '
         Me.btnNo1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNo1.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnNo1.Location = New System.Drawing.Point(368, 24)
+        Me.btnNo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo1.Location = New System.Drawing.Point(384, 1)
         Me.btnNo1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnNo1.Name = "btnNo1"
-        Me.btnNo1.Size = New System.Drawing.Size(71, 31)
+        Me.btnNo1.Size = New System.Drawing.Size(65, 27)
         Me.btnNo1.TabIndex = 13
         Me.btnNo1.Text = "No"
         Me.btnNo1.UseVisualStyleBackColor = False
@@ -211,10 +230,11 @@ Partial Class Form1
         '
         Me.btnNo2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNo2.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnNo2.Location = New System.Drawing.Point(368, 10)
+        Me.btnNo2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo2.Location = New System.Drawing.Point(384, 1)
         Me.btnNo2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnNo2.Name = "btnNo2"
-        Me.btnNo2.Size = New System.Drawing.Size(71, 39)
+        Me.btnNo2.Size = New System.Drawing.Size(65, 27)
         Me.btnNo2.TabIndex = 15
         Me.btnNo2.Text = "No"
         Me.btnNo2.UseVisualStyleBackColor = False
@@ -223,10 +243,11 @@ Partial Class Form1
         '
         Me.btnYes2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnYes2.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnYes2.Location = New System.Drawing.Point(288, 10)
+        Me.btnYes2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes2.Location = New System.Drawing.Point(310, 1)
         Me.btnYes2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnYes2.Name = "btnYes2"
-        Me.btnYes2.Size = New System.Drawing.Size(71, 39)
+        Me.btnYes2.Size = New System.Drawing.Size(65, 27)
         Me.btnYes2.TabIndex = 14
         Me.btnYes2.Text = "Yes"
         Me.btnYes2.UseVisualStyleBackColor = False
@@ -239,10 +260,10 @@ Partial Class Form1
         Me.PanelQ2.Controls.Add(Me.lblQ2)
         Me.PanelQ2.Controls.Add(Me.btnYes2)
         Me.PanelQ2.Controls.Add(Me.btnNo2)
-        Me.PanelQ2.Location = New System.Drawing.Point(1, 380)
+        Me.PanelQ2.Location = New System.Drawing.Point(1, 351)
         Me.PanelQ2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ2.Name = "PanelQ2"
-        Me.PanelQ2.Size = New System.Drawing.Size(457, 62)
+        Me.PanelQ2.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ2.TabIndex = 17
         '
         'PanelQ1
@@ -257,16 +278,16 @@ Partial Class Form1
         Me.PanelQ1.Location = New System.Drawing.Point(1, 315)
         Me.PanelQ1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ1.Name = "PanelQ1"
-        Me.PanelQ1.Size = New System.Drawing.Size(457, 62)
+        Me.PanelQ1.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ1.TabIndex = 18
         '
         'lblBorkenLocation
         '
         Me.lblBorkenLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblBorkenLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBorkenLocation.Location = New System.Drawing.Point(288, 2)
+        Me.lblBorkenLocation.Location = New System.Drawing.Point(217, 5)
         Me.lblBorkenLocation.Name = "lblBorkenLocation"
-        Me.lblBorkenLocation.Size = New System.Drawing.Size(151, 20)
+        Me.lblBorkenLocation.Size = New System.Drawing.Size(87, 20)
         Me.lblBorkenLocation.TabIndex = 14
         Me.lblBorkenLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -279,20 +300,21 @@ Partial Class Form1
         Me.PanelQ3.Controls.Add(Me.btnYes3)
         Me.PanelQ3.Controls.Add(Me.btnNo3)
         Me.PanelQ3.Enabled = False
-        Me.PanelQ3.Location = New System.Drawing.Point(1, 447)
+        Me.PanelQ3.Location = New System.Drawing.Point(1, 492)
         Me.PanelQ3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ3.Name = "PanelQ3"
-        Me.PanelQ3.Size = New System.Drawing.Size(457, 62)
+        Me.PanelQ3.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ3.TabIndex = 19
         '
         'lblQ3
         '
         Me.lblQ3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQ3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblQ3.Location = New System.Drawing.Point(-1, 0)
         Me.lblQ3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblQ3.Name = "lblQ3"
-        Me.lblQ3.Size = New System.Drawing.Size(281, 60)
+        Me.lblQ3.Size = New System.Drawing.Size(235, 25)
         Me.lblQ3.TabIndex = 11
         Me.lblQ3.Text = "Is there water ingression?"
         Me.lblQ3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -301,10 +323,11 @@ Partial Class Form1
         '
         Me.btnYes3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnYes3.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnYes3.Location = New System.Drawing.Point(288, 11)
+        Me.btnYes3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes3.Location = New System.Drawing.Point(310, 1)
         Me.btnYes3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnYes3.Name = "btnYes3"
-        Me.btnYes3.Size = New System.Drawing.Size(71, 39)
+        Me.btnYes3.Size = New System.Drawing.Size(65, 27)
         Me.btnYes3.TabIndex = 12
         Me.btnYes3.Text = "Yes"
         Me.btnYes3.UseVisualStyleBackColor = False
@@ -313,10 +336,11 @@ Partial Class Form1
         '
         Me.btnNo3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNo3.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnNo3.Location = New System.Drawing.Point(368, 11)
+        Me.btnNo3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo3.Location = New System.Drawing.Point(384, 1)
         Me.btnNo3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnNo3.Name = "btnNo3"
-        Me.btnNo3.Size = New System.Drawing.Size(71, 39)
+        Me.btnNo3.Size = New System.Drawing.Size(65, 27)
         Me.btnNo3.TabIndex = 13
         Me.btnNo3.Text = "No"
         Me.btnNo3.UseVisualStyleBackColor = False
@@ -447,6 +471,10 @@ Partial Class Form1
         Me.PanelK2XX.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelK2XX.Controls.Add(Me.PanelQ6)
+        Me.PanelK2XX.Controls.Add(Me.PanelQ3)
+        Me.PanelK2XX.Controls.Add(Me.PanelQ5)
+        Me.PanelK2XX.Controls.Add(Me.PanelQ4)
         Me.PanelK2XX.Controls.Add(Me.PanelBushingInfo)
         Me.PanelK2XX.Controls.Add(Me.lblBushing)
         Me.PanelK2XX.Controls.Add(Me.btnNoTag)
@@ -461,7 +489,6 @@ Partial Class Form1
         Me.PanelK2XX.Controls.Add(Me.btnClearData)
         Me.PanelK2XX.Controls.Add(Me.btnDebug)
         Me.PanelK2XX.Controls.Add(Me.Panel4)
-        Me.PanelK2XX.Controls.Add(Me.PanelQ3)
         Me.PanelK2XX.Controls.Add(Me.PanelQ2)
         Me.PanelK2XX.Controls.Add(Me.PanelDebug)
         Me.PanelK2XX.Controls.Add(Me.PanelRB1)
@@ -470,6 +497,168 @@ Partial Class Form1
         Me.PanelK2XX.Name = "PanelK2XX"
         Me.PanelK2XX.Size = New System.Drawing.Size(944, 534)
         Me.PanelK2XX.TabIndex = 24
+        '
+        'PanelQ6
+        '
+        Me.PanelQ6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PanelQ6.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.PanelQ6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelQ6.Controls.Add(Me.lblQ6)
+        Me.PanelQ6.Controls.Add(Me.btnYes6)
+        Me.PanelQ6.Controls.Add(Me.btnNo6)
+        Me.PanelQ6.Enabled = False
+        Me.PanelQ6.Location = New System.Drawing.Point(1, 457)
+        Me.PanelQ6.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PanelQ6.Name = "PanelQ6"
+        Me.PanelQ6.Size = New System.Drawing.Size(457, 32)
+        Me.PanelQ6.TabIndex = 44
+        '
+        'lblQ6
+        '
+        Me.lblQ6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQ6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQ6.Location = New System.Drawing.Point(1, 0)
+        Me.lblQ6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblQ6.Name = "lblQ6"
+        Me.lblQ6.Size = New System.Drawing.Size(235, 25)
+        Me.lblQ6.TabIndex = 11
+        Me.lblQ6.Text = "Pinion Sensor Conn Broken?"
+        Me.lblQ6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnYes6
+        '
+        Me.btnYes6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnYes6.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnYes6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes6.Location = New System.Drawing.Point(310, 1)
+        Me.btnYes6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnYes6.Name = "btnYes6"
+        Me.btnYes6.Size = New System.Drawing.Size(65, 27)
+        Me.btnYes6.TabIndex = 12
+        Me.btnYes6.Text = "Yes"
+        Me.btnYes6.UseVisualStyleBackColor = False
+        '
+        'btnNo6
+        '
+        Me.btnNo6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNo6.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnNo6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo6.Location = New System.Drawing.Point(384, 1)
+        Me.btnNo6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnNo6.Name = "btnNo6"
+        Me.btnNo6.Size = New System.Drawing.Size(65, 27)
+        Me.btnNo6.TabIndex = 13
+        Me.btnNo6.Text = "No"
+        Me.btnNo6.UseVisualStyleBackColor = False
+        '
+        'PanelQ5
+        '
+        Me.PanelQ5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PanelQ5.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.PanelQ5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelQ5.Controls.Add(Me.lblQ5)
+        Me.PanelQ5.Controls.Add(Me.btnYes5)
+        Me.PanelQ5.Controls.Add(Me.btnNo5)
+        Me.PanelQ5.Enabled = False
+        Me.PanelQ5.Location = New System.Drawing.Point(1, 421)
+        Me.PanelQ5.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PanelQ5.Name = "PanelQ5"
+        Me.PanelQ5.Size = New System.Drawing.Size(457, 32)
+        Me.PanelQ5.TabIndex = 43
+        '
+        'lblQ5
+        '
+        Me.lblQ5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQ5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQ5.Location = New System.Drawing.Point(1, 0)
+        Me.lblQ5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblQ5.Name = "lblQ5"
+        Me.lblQ5.Size = New System.Drawing.Size(235, 25)
+        Me.lblQ5.TabIndex = 11
+        Me.lblQ5.Text = "Bent Pinion?"
+        Me.lblQ5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnYes5
+        '
+        Me.btnYes5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnYes5.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnYes5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes5.Location = New System.Drawing.Point(310, 1)
+        Me.btnYes5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnYes5.Name = "btnYes5"
+        Me.btnYes5.Size = New System.Drawing.Size(65, 27)
+        Me.btnYes5.TabIndex = 12
+        Me.btnYes5.Text = "Yes"
+        Me.btnYes5.UseVisualStyleBackColor = False
+        '
+        'btnNo5
+        '
+        Me.btnNo5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNo5.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnNo5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo5.Location = New System.Drawing.Point(384, 1)
+        Me.btnNo5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnNo5.Name = "btnNo5"
+        Me.btnNo5.Size = New System.Drawing.Size(65, 27)
+        Me.btnNo5.TabIndex = 13
+        Me.btnNo5.Text = "No"
+        Me.btnNo5.UseVisualStyleBackColor = False
+        '
+        'PanelQ4
+        '
+        Me.PanelQ4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.PanelQ4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.PanelQ4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelQ4.Controls.Add(Me.lblQ4)
+        Me.PanelQ4.Controls.Add(Me.btnYes4)
+        Me.PanelQ4.Controls.Add(Me.btnNo4)
+        Me.PanelQ4.Enabled = False
+        Me.PanelQ4.Location = New System.Drawing.Point(1, 386)
+        Me.PanelQ4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.PanelQ4.Name = "PanelQ4"
+        Me.PanelQ4.Size = New System.Drawing.Size(457, 32)
+        Me.PanelQ4.TabIndex = 42
+        '
+        'lblQ4
+        '
+        Me.lblQ4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblQ4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQ4.Location = New System.Drawing.Point(1, 0)
+        Me.lblQ4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblQ4.Name = "lblQ4"
+        Me.lblQ4.Size = New System.Drawing.Size(235, 25)
+        Me.lblQ4.TabIndex = 11
+        Me.lblQ4.Text = "Pinion with Corrosion?"
+        Me.lblQ4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnYes4
+        '
+        Me.btnYes4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnYes4.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnYes4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnYes4.Location = New System.Drawing.Point(310, 1)
+        Me.btnYes4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnYes4.Name = "btnYes4"
+        Me.btnYes4.Size = New System.Drawing.Size(65, 27)
+        Me.btnYes4.TabIndex = 12
+        Me.btnYes4.Text = "Yes"
+        Me.btnYes4.UseVisualStyleBackColor = False
+        '
+        'btnNo4
+        '
+        Me.btnNo4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNo4.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnNo4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNo4.Location = New System.Drawing.Point(384, 1)
+        Me.btnNo4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnNo4.Name = "btnNo4"
+        Me.btnNo4.Size = New System.Drawing.Size(65, 27)
+        Me.btnNo4.TabIndex = 13
+        Me.btnNo4.Text = "No"
+        Me.btnNo4.UseVisualStyleBackColor = False
         '
         'PanelBushingInfo
         '
@@ -1121,6 +1310,9 @@ Partial Class Form1
         Me.MenuStrip1.PerformLayout()
         Me.PanelK2XX.ResumeLayout(False)
         Me.PanelK2XX.PerformLayout()
+        Me.PanelQ6.ResumeLayout(False)
+        Me.PanelQ5.ResumeLayout(False)
+        Me.PanelQ4.ResumeLayout(False)
         Me.PanelBushingInfo.ResumeLayout(False)
         Me.PanelInhale.ResumeLayout(False)
         Me.PanelInhale.PerformLayout()
@@ -1228,4 +1420,16 @@ Partial Class Form1
     Friend WithEvents lblBushingInfo As Label
     Friend WithEvents lblCFactor As Label
     Friend WithEvents lblCFactorInfo As Label
+    Friend WithEvents PanelQ6 As Panel
+    Friend WithEvents lblQ6 As Label
+    Friend WithEvents btnYes6 As Button
+    Friend WithEvents btnNo6 As Button
+    Friend WithEvents PanelQ5 As Panel
+    Friend WithEvents lblQ5 As Label
+    Friend WithEvents btnYes5 As Button
+    Friend WithEvents btnNo5 As Button
+    Friend WithEvents PanelQ4 As Panel
+    Friend WithEvents lblQ4 As Label
+    Friend WithEvents btnYes4 As Button
+    Friend WithEvents btnNo4 As Button
 End Class

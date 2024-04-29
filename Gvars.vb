@@ -286,6 +286,13 @@
         Public HousingBrokenLocation As String
         Public ConnectorBroken As Boolean
 
+        ' Added by Erick Medrano 2024-04-18
+
+        Public CorrosionPinion As Boolean
+        Public BentPinion As Boolean
+        Public ConnectorPinion As Boolean
+        ' End Add
+
         'Disposition
         Public Bin As String
         Public ScrapHousing As Boolean
@@ -390,6 +397,14 @@
             .ConnectorBroken = False
             .WaterIngression = False
             .WaterIngressionValid = True
+
+            'Added by Erick Medrano 2024-04-18
+
+            .CorrosionPinion = False
+            .BentPinion = False
+            .ConnectorPinion = False
+
+            'End Add
 
             .UnknownDTCFound = False
             .BadDTCFound = False
