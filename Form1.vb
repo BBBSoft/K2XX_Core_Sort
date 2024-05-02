@@ -2360,6 +2360,45 @@ Public Class Form1
                     lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "W" + vbCrLf + Phrases(42, Language)
                     l = "W"
                 End If
+            ElseIf PartInfo.Contains(Gvars.MyData.HousingBrokenLocation) And PartInfo.Contains("NoComm") And PartInfo.Contains("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                Else
+                    lblDisposition.BackColor = Color.Black
+                    lblDisposition.ForeColor = Color.White
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "BL" + vbCrLf + Phrases(43, Language)
+                    l = "BL"
+                End If
+            ElseIf PartInfo.Contains("NoComm") And PartInfo.Contains("ConnBroken") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Bisque
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CH" + vbCrLf + Phrases(37, Language)
+                    l = "H"
+                Else
+                    lblDisposition.BackColor = Color.Bisque
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "H" + vbCrLf + Phrases(37, Language)
+                    l = "H"
+                End If
+            ElseIf PartInfo.Equals("NoComm") Then
+                If NoTag Then
+                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                    lblDisposition.BackColor = Color.Bisque
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CH" + vbCrLf + Phrases(37, Language)
+                    l = "H"
+                Else
+                    lblDisposition.BackColor = Color.Bisque
+                    lblDisposition.ForeColor = Color.Black
+                    lblDisposition.Text += GetLookupValue(ACDPN(0), Loc) + "H" + vbCrLf + Phrases(37, Language)
+                    l = "H"
+                End If
             ElseIf PartInfo.Contains(Gvars.MyData.HousingBrokenLocation) Then
                 If NoTag Then
                     Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
@@ -3406,7 +3445,8 @@ Public Class Form1
             PinionBad = True
 
             'End Add
-
+        ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.NoComm Then
+            BadDTCFound = True
 
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
             Hold = True
@@ -3635,18 +3675,18 @@ Public Class Form1
                     Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
 
                     PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
-                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
-                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CB"
+                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CH"
+                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CH"
+                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CH"
                     ' End Added by Erick medrano 2024-01-15
 
                 Else
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "B"
+                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "H"
                     PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "B"
-                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "B"
+                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "H"
+                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "H"
                     'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
-                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "B"
+                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "H"
                 End If
 
                 'Added by Erick Medrano 2024-04-18
