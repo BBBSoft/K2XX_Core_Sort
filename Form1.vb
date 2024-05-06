@@ -3451,7 +3451,9 @@ Public Class Form1
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound And Gvars.MyData.SpecialCaseDTCs Then
             Hold = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound Then
-            GM = True
+            BadDTCFound = True
+            'ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.BadDTCFound Then
+            '    GM = True
         ElseIf Not Gvars.MyData.HousingBroken And Gvars.MyData.AllGoodDTCs And Gvars.MyData.ConnectorBroken Then
             GM = True
             'ACD = True
