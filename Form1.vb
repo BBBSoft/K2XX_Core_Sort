@@ -3614,13 +3614,17 @@ Public Class Form1
             Else
                 'Bin = "Place RFID tag on Rack" + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), 1)
                 'Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), Loc)
-                Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), Loc) + "W"
+                'Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(GMPN(0), Loc) + "W"
+                Bin = Phrases(15, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "W"
                 'PrinterInfo.Bin = GetLookupValue(GMPN(0), 0)
                 PrinterInfo.Bin = ""
-                PrinterInfo.BBBCorePN = GetLookupValue(GMPN(0), Loc) + "W"
-                PrinterInfo.GMCorePN = GetLookupValue(GMPN(0), Loc) + "W"
+                'PrinterInfo.BBBCorePN = GetLookupValue(GMPN(0), Loc) + "W"
+                PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "W"
+                'PrinterInfo.GMCorePN = GetLookupValue(GMPN(0), Loc) + "W"
+                PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "W"
                 'MyData.Bin = GetLookupValue(GMPN(0), 0) + " - " + GetLookupValue(GMPN(0), Loc)
-                Gvars.MyData.Bin = GetLookupValue(GMPN(0), Loc) + "W"
+                'Gvars.MyData.Bin = GetLookupValue(GMPN(0), Loc) + "W"
+                Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "W"
             End If
 
         ElseIf ACD = True Then
