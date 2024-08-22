@@ -563,9 +563,22 @@ Public Class Form1
     Private Sub SetupPrintLabel_Scrap()
 
         'PrinterInfo = New sK2xxLabelInfo("PaperPort Image Printer", New Point(0, 0))
-        PrinterInfo = New sK2xxLabelInfo(True)
-        PrinterInfo.Text.Add(New sPrinterText("SCRAP", New Point(25, 30), "Arial", 28, FontStyle.Bold))
-        PrinterInfo.Text.Add(New sPrinterText(GetDateFormat(), New Point(10, 75), "Arial", 10, FontStyle.Bold))
+
+        If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+            PrinterInfo = New sK2xxLabelInfo(True)
+            PrinterInfo.Text.Add(New sPrinterText("SCRAP", New Point(25, 30), "Arial", 28, FontStyle.Bold))
+            PrinterInfo.Text.Add(New sPrinterText(GetDateFormat(), New Point(10, 75), "Arial", 10, FontStyle.Bold))
+        Else
+            PrinterInfo = New sK2xxLabelInfo(True)
+            PrinterInfo.Text.Add(New sPrinterText("SCRAP", New Point(25, 30), "Arial", 28, FontStyle.Bold))
+            PrinterInfo.Text.Add(New sPrinterText(GetDateFormat(), New Point(10, 75), "Arial", 10, FontStyle.Bold))
+            PrinterInfo.Text.Add(New sPrinterText(BBBPN(0), New Point(100, 75), "Arial", 10, FontStyle.Bold))
+        End If
+
+        'PrinterInfo = New sK2xxLabelInfo(True)
+        'PrinterInfo.Text.Add(New sPrinterText("SCRAP", New Point(25, 30), "Arial", 28, FontStyle.Bold))
+        'PrinterInfo.Text.Add(New sPrinterText(GetDateFormat(), New Point(10, 75), "Arial", 10, FontStyle.Bold))
+        'PrinterInfo.Text.Add(New sPrinterText(BBBPN(0), New Point(100, 75), "Arial", 10, FontStyle.Bold))
 
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1154,7 +1167,7 @@ Public Class Form1
         PanelQ3.Enabled = False
 
         'Delete existing output file
-        If BBBLib.Func.theComputerName <> "LAM-LJUAREZ" Then
+        If BBBLib.Func.theComputerName <> "LAM-LJUAREZ" Or Func.theComputerName.Equals("LAM-DEVELOPER") Then
             If Not DeleteFile(Gvars.InhalePrg.OutputFileLocation) Then
                 MsgBox("error trying to delete File: " + Gvars.InhalePrg.OutputFileLocation)
                 Exit Sub
