@@ -560,6 +560,15 @@ Public Class Form1
         Catch ex As Exception
         End Try
     End Sub
+    Private Sub SetupPrintLabel_BOL()
+
+        PrinterInfo = New sK2xxLabelInfo(True)
+        PrinterInfo.Text.Add(New sPrinterText("BOL: ", New Point(10, 30), "Arial", 10, FontStyle.Bold))
+        PrinterInfo.Text.Add(New sPrinterText(lblBillOfLading.Text, New Point(10, 44), "Arial", 9, FontStyle.Regular))
+        PrinterInfo.Text.Add(New sPrinterText(Gvars.MyData.RFID_Tag + "-" + Gvars.MyData.RFID_Idx.ToString() + "-" + GetDateFormat(), New Point(10, 75), "Arial", 9, FontStyle.Bold))
+
+
+    End Sub
     Private Sub SetupPrintLabel_Scrap()
 
         'PrinterInfo = New sK2xxLabelInfo("PaperPort Image Printer", New Point(0, 0))
@@ -1154,6 +1163,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnRunInhale_Click(sender As Object, e As EventArgs) Handles btnRunInhale.Click
+
+
         If BGW.IsBusy Then Exit Sub
         btnRunInhale.Enabled = False
         PanelInhale.BackColor = Reset_BackColor
@@ -1183,6 +1194,9 @@ Public Class Form1
         'Set wait for return Flag
 
         'Read Output File.
+
+
+
 
     End Sub
 
@@ -2160,13 +2174,44 @@ Public Class Form1
                        BBBLib.Func.theComputerName = "LAM-LJUAREZ" Then
                         If (Gvars.MyData.HoldUnit = True) Then
 
+                            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                'Imprime el bol xd
+                                SetupPrintLabel_BOL()
+                                Try
+                                    setupPrtdoc()
+                                    PrtDoc.Print()
+                                Catch ex As Exception
+                                End Try
+                            End If
                         ElseIf (Gvars.MyData.Bin <> "Scrap") Then
                             Try
+                                'Imprime lo normal
                                 setupPrtdoc()
                                 PrtDoc.Print()
+
+                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                    'Imprime el bol xd
+                                    SetupPrintLabel_BOL()
+                                    Try
+                                        setupPrtdoc()
+                                        PrtDoc.Print()
+                                    Catch ex As Exception
+                                    End Try
+                                End If
+
                             Catch ex As Exception
                             End Try
                             If Gvars.MyData.Bin.Contains("Remove MPP") Then
+
+                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                    'Imprime el bol xd
+                                    SetupPrintLabel_BOL()
+                                    Try
+                                        setupPrtdoc()
+                                        PrtDoc.Print()
+                                    Catch ex As Exception
+                                    End Try
+                                End If
                                 SetupPrintLabel_Scrap()
                                 Try
                                     setupPrtdoc()
@@ -2175,6 +2220,16 @@ Public Class Form1
                                 End Try
                             End If
                         Else
+
+                            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                'Imprime el bol xd
+                                SetupPrintLabel_BOL()
+                                Try
+                                    setupPrtdoc()
+                                    PrtDoc.Print()
+                                Catch ex As Exception
+                                End Try
+                            End If
                             SetupPrintLabel_Scrap()
                             Try
                                 setupPrtdoc()
@@ -2218,6 +2273,7 @@ Public Class Form1
             Case eMachineState.SaveData
                 If Gvars.ProductType = Gvars.eProductType.K2XX_BBB Or Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
                     savedata()
+
                 ElseIf Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
                     save_T1XX_data()
                 End If
@@ -2226,6 +2282,16 @@ Public Class Form1
                 If Gvars.MyData.HoldUnit Then
                     lblDisposition.Text = "Hold for " + Gvars.MyData.Contact + " @ x" + Gvars.MyData.EXT
                     SetupPrintLabel_HoldUnit()
+
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                        'Imprime el bol xd
+                        SetupPrintLabel_BOL()
+                        Try
+                            setupPrtdoc()
+                            PrtDoc.Print()
+                        Catch ex As Exception
+                        End Try
+                    End If
                     UnitWatch.SetRFIDidxStatusToInactive(Gvars.MyData.RFID_Idx)
                 End If
 
@@ -2247,8 +2313,28 @@ Public Class Form1
                 If Gvars.MyData.HoldUnit Then
                     lblDisposition.Text = "Hold for " + Gvars.MyData.Contact + " @ x" + Gvars.MyData.EXT
                     SetupPrintLabel_HoldUnit()
+
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                        'Imprime el bol xd
+                        SetupPrintLabel_BOL()
+                        Try
+                            setupPrtdoc()
+                            PrtDoc.Print()
+                        Catch ex As Exception
+                        End Try
+                    End If
                     UnitWatch.SetRFIDidxStatusToInactive(Gvars.MyData.RFID_Idx)
                 Else
+
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                        'Imprime el bol xd
+                        SetupPrintLabel_BOL()
+                        Try
+                            setupPrtdoc()
+                            PrtDoc.Print()
+                        Catch ex As Exception
+                        End Try
+                    End If
                     setupPrtdoc()
                     PrtDoc.Print()
                 End If
@@ -2675,7 +2761,7 @@ Public Class Form1
             lblDisposition.BackColor = Color.Maroon
             lblDisposition.ForeColor = Color.Yellow
             lblDisposition.Text += vbCrLf + Phrases(39, Language)
-        ElseIf s.trim = "Hold Bin" Then
+        ElseIf s.Trim = "Hold Bin" Then
             lblDisposition.BackColor = Color.LightCyan
             lblDisposition.ForeColor = Color.Black
             lblDisposition.Text += vbCrLf + Phrases(41, Language)
@@ -3305,7 +3391,7 @@ Public Class Form1
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
             Gvars.MyData.ScrapMotor = True
-        ElseIf (gVARS.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
+        ElseIf (Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
             Gvars.MyData.ScrapMotor = True
@@ -3380,7 +3466,7 @@ Public Class Form1
             PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), 5)
             Gvars.MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
 
-        ElseIf (gVARS.MyData.ScrapHousing = True) And (gVARS.MyData.ScrapMotor = False) Then
+        ElseIf (Gvars.MyData.ScrapHousing = True) And (Gvars.MyData.ScrapMotor = False) Then
 
             Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc)
             If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
@@ -3423,7 +3509,7 @@ Public Class Form1
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
             Gvars.MyData.ScrapMotor = True
-        ElseIf (gVARS.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
+        ElseIf (Gvars.MyData.WaterIngression And Gvars.MyData.WaterIngressionValid) Then
             ScrapAll = True
             Gvars.MyData.ScrapHousing = True
             Gvars.MyData.ScrapMotor = True
@@ -3668,25 +3754,25 @@ Public Class Form1
         ElseIf PinionBad = True Then
 
             If NoTag Then
-                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+                Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
 
-                    PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    ' End Added by Erick medrano 2024-01-15
+                PrinterInfo.Bin = ""
+                PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                ' End Added by Erick medrano 2024-01-15
 
-                Else
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
-                    PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
-                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
-                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
-                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
-                End If
+            Else
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
+                PrinterInfo.Bin = ""
+                PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
+            End If
 
-            ElseIf BadDTCFound = True Then
+        ElseIf BadDTCFound = True Then
             If Gvars.MyData.NoComm Then
 
                 If NoTag Then
@@ -3762,49 +3848,49 @@ Public Class Form1
 
         ElseIf (Gvars.MyData.ScrapHousing = True) And (Gvars.MyData.ScrapMotor = False) Then
 
-                ' Added by Erick Medrano 2024-04-18
+            ' Added by Erick Medrano 2024-04-18
 
-                If NoTag Then
-                    Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
+            If NoTag Then
+                Dim CS As Integer = IIf(dgv.Rows(0).Cells("Software_Version1").Value.ToString.StartsWith("K2xx_12"), 1, 0)
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS)
 
                 PrinterInfo.Bin = ""
                 PrinterInfo.BBBCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
-                    ' End Added by Erick medrano 2024-01-15
+                PrinterInfo.GMCorePN = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                Gvars.MyData.Bin = GetLookupValueBBB(Integer.Parse(lblCFactorInfo.Text), Integer.Parse(lblBushingInfo.Text), CS) + "CBL"
+                ' End Added by Erick medrano 2024-01-15
 
-                Else
-                    Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
-                    PrinterInfo.Bin = ""
-                    PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
-                    PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
-                    'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
-                    Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
-                End If
-
-                ' End Add
-
-                'Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
-                ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
-                ''Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-                ''If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
-                'Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
-                'PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
-                'PrinterInfo.BBBCorePN = BBBCorePN
-                ''PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-                ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
-                'PrinterInfo.GMCorePN = ""
-                ''MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
-                'Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
-
-            ElseIf ScrapAll = True Then
-                Gvars.MyData.Bin = "Scrap"
-                Bin = Phrases(19, Language)
             Else
-                MsgBox("Error in Desposition routine.")
-                End
+                Bin = Phrases(14, Language) + vbCrLf + GetLookupValue(ACDPN(0), Loc) + "BL"
+                PrinterInfo.Bin = ""
+                PrinterInfo.BBBCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                PrinterInfo.GMCorePN = GetLookupValue(ACDPN(0), Loc) + "BL"
+                'MyData.Bin = GetLookupValue(ACDPN(0), 0) + " - " + GetLookupValue(ACDPN(0), Loc)
+                Gvars.MyData.Bin = GetLookupValue(ACDPN(0), Loc) + "BL"
             End If
+
+            ' End Add
+
+            'Dim BBBCorePN As String = GetLookupValue(GetLookupValue(ACDPN(0), 3), Loc) + "C" + IIf((Gvars.MyData.BadDTCFound) Or (Gvars.MyData.ConnectorBroken), "H", "")
+            ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then BBBCorePN += "H"
+            ''Bin = "Remove MPP from Rack, Scrap Rack" + vbCrLf + "and place RFID tag on MPP" + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+            ''If Gvars.MyData.BadDTCFound Then BBBCorePN += "H"
+            'Bin = Phrases(18, Language) + vbCrLf + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+            'PrinterInfo.Bin = GetLookupValue(GetLookupValue(ACDPN(0), 3), 0)
+            'PrinterInfo.BBBCorePN = BBBCorePN
+            ''PrinterInfo.BBBCorePN = GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+            ''If Gvars.MyData.BadDTCFound Or Gvars.MyData.ConnectorBroken Then PrinterInfo.BBBCorePN += "H"
+            'PrinterInfo.GMCorePN = ""
+            ''MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 1)
+            'Gvars.MyData.Bin = "Remove MPP: " + GetLookupValue(GetLookupValue(ACDPN(0), 3), 0) + " - " + BBBCorePN
+
+        ElseIf ScrapAll = True Then
+            Gvars.MyData.Bin = "Scrap"
+            Bin = Phrases(19, Language)
+        Else
+            MsgBox("Error in Desposition routine.")
+            End
+        End If
 
         'If PrinterInfo.PartInfo <> "" Then SetLabelColorIAM(PrinterInfo.PartInfo)
         'If Bin.IndexOf("203-0") >= 0 And Not NoTag And Not Gvars.MyData.BadDTCFound Or Gvars.MyData.NoComm And Not Gvars.MyData.AcceptableDTCs Then
@@ -4141,7 +4227,7 @@ Public Class Form1
             PartInfo += "BadDTCs"
         End If
 
-            If BrokenConnector.Trim.ToUpper = "TRUE" Then
+        If BrokenConnector.Trim.ToUpper = "TRUE" Then
             If PartInfo.Length > 0 Then PartInfo += ", "
             PartInfo += "ConnBroken"
         End If
