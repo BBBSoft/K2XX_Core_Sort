@@ -563,8 +563,8 @@ Public Class Form1
     Private Sub SetupPrintLabel_BOL()
 
         PrinterInfo = New sK2xxLabelInfo(True)
-        PrinterInfo.Text.Add(New sPrinterText("BOL: ", New Point(10, 30), "Arial", 10, FontStyle.Bold))
-        PrinterInfo.Text.Add(New sPrinterText(lblBillOfLading.Text, New Point(10, 44), "Arial", 9, FontStyle.Regular))
+        PrinterInfo.Text.Add(New sPrinterText("BOL: ", New Point(10, 30), "Arial", 12, FontStyle.Bold))
+        PrinterInfo.Text.Add(New sPrinterText(lblBillOfLading.Text, New Point(10, 45), "Arial", 10, FontStyle.Bold))
         PrinterInfo.Text.Add(New sPrinterText(Gvars.MyData.RFID_Tag + "-" + Gvars.MyData.RFID_Idx.ToString() + "-" + GetDateFormat(), New Point(10, 75), "Arial", 9, FontStyle.Bold))
 
 
@@ -2220,16 +2220,20 @@ Public Class Form1
                                 End Try
                             End If
                         Else
+                            'Dim idx As Integer = Get_Idx_For_Scrap()
+                            'Gvars.MyData.RFID_Tag = "Scrap"
+                            'Gvars.MyData.RFID_Idx = idx
 
-                            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
-                                'Imprime el bol xd
-                                SetupPrintLabel_BOL()
-                                Try
-                                    setupPrtdoc()
-                                    PrtDoc.Print()
-                                Catch ex As Exception
-                                End Try
-                            End If
+                            'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                            '    'Imprime el bol xd
+                            '    SetupPrintLabel_BOL()
+                            '    Try
+                            '        setupPrtdoc()
+                            '        PrtDoc.Print()
+                            '    Catch ex As Exception
+                            '    End Try
+                            'End If
+
                             SetupPrintLabel_Scrap()
                             Try
                                 setupPrtdoc()
@@ -2326,17 +2330,21 @@ Public Class Form1
                     UnitWatch.SetRFIDidxStatusToInactive(Gvars.MyData.RFID_Idx)
                 Else
 
+
+                    'SetupPrintLabel_Scrap()
+                    setupPrtdoc()
+                    PrtDoc.Print()
+
                     If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
                         'Imprime el bol xd
                         SetupPrintLabel_BOL()
                         Try
                             setupPrtdoc()
                             PrtDoc.Print()
+                            PrtDoc.Print()
                         Catch ex As Exception
                         End Try
                     End If
-                    setupPrtdoc()
-                    PrtDoc.Print()
                 End If
 
 
