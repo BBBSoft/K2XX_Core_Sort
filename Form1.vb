@@ -2303,13 +2303,13 @@ Public Class Form1
                 MachineState = eMachineState.ClickClearToContinue
 
             Case eMachineState.SaveDataScrap
-                Dim idx As Integer = Get_Idx_For_Scrap()
+                Dim idx As Integer = Get_Idx_For_Scrap() ' Aqui inserta el registro del scrap  y a la vez nos traemos el idx. :v
                 Gvars.MyData.RFID_Tag = "Scrap"
                 Gvars.MyData.RFID_Idx = idx
 
 
                 If Gvars.ProductType = Gvars.eProductType.K2XX_BBB Or Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
-                    savedata()
+                    savedataScrap() 'Y aqui ya namas actualizamos lo que se tenga que actualizar. v: pero hay que modificarlo para que tambien se actualice el status si es scrap...
                 ElseIf Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
                     save_T1XX_data()
                 End If
@@ -3042,14 +3042,199 @@ Public Class Form1
         End If
     End Function
 
+    Private Function savedataScrap() ' Hice esta funcion para no hacer un mounstro de la funcion de savedata
+        ''LITERAL CONTIENE LO MISMO NADA MAS QUE SE LE AGREGO LO DE HACERLE EL UPDATE AL STATUS PARA QUE SEA 9 
+
+        If Gvars.MyData.HoldUnit Then
+            Gvars.MyData.Bin = "Hold Unit " + Gvars.MyData.Contact + " @x" + Gvars.MyData.EXT
+        End If
+
+
+
+        Try
+
+            Dim aQuery As String = ""
+            aQuery = "UPDATE [K2XX_CoreSort] "
+            aQuery += "SET [PCName]=@PCName, "
+            aQuery += "[RackBarCode]=@1, "
+            aQuery += "[CorePN]=@2, "
+            aQuery += "[CoreSN]=@3, "
+            aQuery += "[BuildDate]=@4, "
+            aQuery += "[SoftwareVersion1]=@5, "
+            aQuery += "[SoftwareVersion2]=@6, "
+            aQuery += "[SoftwareVersion3]=@7, "
+            aQuery += "[EPS_SN]=@8, "
+            aQuery += "[ECU_SN]=@9, "
+            aQuery += "[VIN]=@10, "
+            aQuery += "[Mfg Traceability]=@11, "
+            aQuery += "[SpecVersion]=@12, "
+            aQuery += "[Gear SN]=@13, "
+            aQuery += "[ECUHardwarePN]=@14, "
+            aQuery += "[GM_PN]=@15, "
+            aQuery += "[DTC_1]=@16, "
+            aQuery += "[DTC_2]=@17, "
+            aQuery += "[DTC_3]=@18, "
+            aQuery += "[DTC_4]=@19, "
+            aQuery += "[DTC_5]=@20, "
+            aQuery += "[DTC_6]=@21, "
+            aQuery += "[DTC_7]=@22, "
+            aQuery += "[DTC_8]=@23, "
+            aQuery += "[DTC_9]=@24, "
+            aQuery += "[DTC_10]=@25, "
+            aQuery += "[DTC_11]=@26, "
+            aQuery += "[DTC_12]=@27, "
+            aQuery += "[DTC_13]=@28, "
+            aQuery += "[DTC_14]=@29, "
+            aQuery += "[DTC_15]=@30, "
+            aQuery += "[DTC_16]=@31, "
+            aQuery += "[DTC_17]=@32, "
+            aQuery += "[DTC_18]=@33, "
+            aQuery += "[DTC_19]=@34, "
+            aQuery += "[DTC_20]=@35, "
+            aQuery += "[Prog Ver]=@36, "
+            aQuery += "[BadDTCs]=@37, "
+            aQuery += "[Torque_Sensor_DTCs]=@38, "
+            aQuery += "[NoComm]=@39, "
+            aQuery += "[AllGoodDTCs]=@40, "
+            aQuery += "[AcceptableDTCs]=@41, "
+            aQuery += "[UnacceptableDTCs]=@42, "
+            aQuery += "[BrokenHousing]=@43, "
+            aQuery += "[ConnectorsBroken]=@44, "
+            aQuery += "[CorrosionPinion]=@45, "
+            aQuery += "[BentPinion]=@46, "
+            aQuery += "[ConnPinBroken]=@47, "
+            aQuery += "[WaterIngressionValid]=@48, "
+            aQuery += "[WaterIngression]=@49, "
+            aQuery += "[GMPN]=@50, "
+            aQuery += "[ACDPN]=@51, "
+            aQuery += "[BBBPN]=@52, "
+            aQuery += "[BIN]=@53, "
+            aQuery += "[ScrapHousing]=@54, "
+            aQuery += "[ScrapMotor]=@55,"
+            aQuery += "[OnBlacklist_Rack]=@56,"
+            aQuery += "[OnBlacklist_MPP]=@57,"
+            aQuery += "[TestData]=@58,"
+            aQuery += "[BillOfLading]=@59,"
+            aQuery += "[BrokenHousingLoc]=@60, "
+            aQuery += "[Status]=@61 "
+            aQuery += "WHERE idx=@idx AND [Status]=1"
+
+            '([RackBarCode],[CorePN],[CoreSN],[BuildDate],[SoftwareVersion1],[SoftwareVersion2],[SoftwareVersion3]"
+            'aQuery += ",[EPS_SN],[ECU_SN],[VIN],[Mfg Traceability],[SpecVersion],[Gear SN],[ECUHardwarePN],[GM_PN],[DTC_1],[DTC_2],[DTC_3],[DTC_4],[DTC_5],[DTC_6],[DTC_7],[DTC_8]"
+            'aQuery += ",[DTC_9],[DTC_10],[DTC_11],[DTC_12],[DTC_13],[DTC_14],[DTC_15],[DTC_16],[DTC_17],[DTC_18],[DTC_19],[DTC_20],[Prog Ver],[BadDTCs],[Torque_Sensor_DTCs],[NoComm]"
+            'aQuery += ",[AllGoodDTCs],[AcceptableDTCs],[UnacceptableDTCs],[BrokenHousing],[ConnectorsBroken],[WaterIngressionValid],[WaterIngression ],[GMPN],[ACDPN],[BBBPN],[BIN])"
+            'aQuery += " VALUES (@1,@2,@3,@4,@5,@6,@7,@8,@9,@10,@11,@12,@13,@14,@15,@16,@17,@18,@19,@20,@21,@22,@23,@24,@25,@26,@27,@28,@29,@30,@31,@32,@33,@34,@35,@36,@37,@38,@39,@40,"
+            'aQuery += "@41,@42,@43,@44,@45,@46,@47,@48,@49,@50,@51,@52)"
+
+            Dim Params As Object(,) = {{"@PCName", BBBLib.Func.theComputerName},
+                                       {"@1", Gvars.MyData.RackBarcode},
+                                       {"@2", Gvars.MyData.CorePN},
+                                       {"@3", Gvars.MyData.CoreSN},
+                                       {"@4", Gvars.MyData.RackBuildDate.ToString("yyyy-MM-dd")},
+                                       {"@5", Gvars.MyData.SoftwareVersion1},
+                                       {"@6", Gvars.MyData.SoftwareVersion2},
+                                       {"@7", Gvars.MyData.SoftwareVersion3},
+                                       {"@8", Gvars.MyData.EPS_SN},
+                                       {"@9", Gvars.MyData.ECU_SN},
+                                       {"@10", Gvars.MyData.VIN},
+                                       {"@11", Gvars.MyData.ManufacturingTraceability},
+                                       {"@12", Gvars.MyData.SpecVersion},
+                                       {"@13", Gvars.MyData.GearSerialNumber},
+                                       {"@14", Gvars.MyData.ECUHardwarePN},
+                                       {"@15", Gvars.MyData.GM_PN},
+                                       {"@16", Gvars.MyData.DTC1},
+                                       {"@17", Gvars.MyData.DTC2},
+                                       {"@18", Gvars.MyData.DTC3},
+                                       {"@19", Gvars.MyData.DTC4},
+                                       {"@20", Gvars.MyData.DTC5},
+                                       {"@21", Gvars.MyData.DTC6},
+                                       {"@22", Gvars.MyData.DTC7},
+                                       {"@23", Gvars.MyData.DTC8},
+                                       {"@24", Gvars.MyData.DTC9},
+                                       {"@25", Gvars.MyData.DTC10},
+                                       {"@26", Gvars.MyData.DTC11},
+                                       {"@27", Gvars.MyData.DTC12},
+                                       {"@28", Gvars.MyData.DTC13},
+                                       {"@29", Gvars.MyData.DTC14},
+                                       {"@30", Gvars.MyData.DTC15},
+                                       {"@31", Gvars.MyData.DTC16},
+                                       {"@32", Gvars.MyData.DTC17},
+                                       {"@33", Gvars.MyData.DTC18},
+                                       {"@34", Gvars.MyData.DTC19},
+                                       {"@35", Gvars.MyData.DTC20},
+                                       {"@36", Gvars.MyData.ProgVer},
+                                       {"@37", Gvars.MyData.BadDTCFound.ToString},
+                                       {"@38", Gvars.MyData.SpecialCaseDTCs.ToString},
+                                       {"@39", Gvars.MyData.NoComm.ToString},
+                                       {"@40", Gvars.MyData.AllGoodDTCs.ToString},
+                                       {"@41", Gvars.MyData.AcceptableDTCs},
+                                       {"@42", Gvars.MyData.UnacceptableDTCs},
+                                       {"@43", Gvars.MyData.HousingBroken.ToString},
+                                       {"@44", Gvars.MyData.ConnectorBroken.ToString},
+                                       {"@45", Gvars.MyData.CorrosionPinion.ToString},
+                                       {"@46", Gvars.MyData.BentPinion.ToString},
+                                       {"@47", Gvars.MyData.ConnectorPinion.ToString},
+                                       {"@48", Gvars.MyData.WaterIngressionValid.ToString},
+                                       {"@49", Gvars.MyData.WaterIngression.ToString},
+                                       {"@50", String.Join(",", GMPN.ToArray())},
+                                       {"@51", String.Join(",", ACDPN.ToArray())},
+                                       {"@52", String.Join(",", BBBPN.ToArray())},
+                                       {"@53", Gvars.MyData.Bin},
+                                       {"@54", Gvars.MyData.ScrapHousing.ToString},
+                                       {"@55", Gvars.MyData.ScrapMotor.ToString},
+                                       {"@56", Gvars.MyData.OnBlackList_Rack.ToString},
+                                       {"@57", Gvars.MyData.OnBlackList_MPP.ToString},
+                                       {"@58", PanelDebug.Visible},
+                                       {"@59", Gvars.MyData.BoL},
+                                       {"@60", Gvars.MyData.HousingBrokenLocation},
+                                       {"@61", "9"},
+                                       {"@idx", Gvars.MyData.RFID_Idx}}
+
+            Dim ds As New BBBLib.SQL.dsDataSet(ConString_EPSData, aQuery, Params)
+            BBBLib.SQL.RunSQLQuery(ds)
+
+            BBBLib.Log.LogMsg("Data Saved: RFID Tag (idx): BIN: " + Gvars.MyData.RFID_Tag + " (" + Gvars.MyData.RFID_Idx.ToString + ") - " + Gvars.MyData.Bin)
+
+            If ds.Failed Then
+                BBBLib.Log.LogMsg("Error Saving Data: (Exception) " + ds.ExceptionMsg)
+                BBBLib.Log.LogMsg("Error Saving Data: (Barcode) " + Gvars.MyData.RackBarcode)
+                BBBLib.Log.LogMsg("Error Saving Data: (Core SN) " + Gvars.MyData.CoreSN)
+                BBBLib.Log.LogMsg("Error Saving Data: (MPP SN) " + Gvars.MyData.ManufacturingTraceability)
+                BBBLib.Log.LogMsg("Error Saving Data: (Acceptable DTCs) " + Gvars.MyData.AcceptableDTCs)
+                BBBLib.Log.LogMsg("Error Saving Data: (Uncceptable DTCs) " + Gvars.MyData.UnacceptableDTCs)
+                BBBLib.Log.LogMsg("Error Saving Data: (RFID) " + Gvars.MyData.RFID_Tag)
+                BBBLib.Log.LogMsg("Error Saving Data: (RFID Idx) " + Gvars.MyData.RFID_Idx.ToString)
+                BBBLib.Log.LogMsg("Error Saving Data: (BIN) " + Gvars.MyData.Bin)
+                MsgBox("Error during save data." + vbCrLf + ds.ExceptionMsg)
+            End If
+
+        Catch ex As Exception
+            BBBLib.Log.LogMsg("Error Saving Data: (Exception) " + ex.ToString)
+            BBBLib.Log.LogMsg("Error Saving Data: (Barcode) " + Gvars.MyData.RackBarcode)
+            BBBLib.Log.LogMsg("Error Saving Data: (Core SN) " + Gvars.MyData.CoreSN)
+            BBBLib.Log.LogMsg("Error Saving Data: (MPP SN) " + Gvars.MyData.ManufacturingTraceability)
+            BBBLib.Log.LogMsg("Error Saving Data: (Acceptable DTCs) " + Gvars.MyData.AcceptableDTCs)
+            BBBLib.Log.LogMsg("Error Saving Data: (Uncceptable DTCs) " + Gvars.MyData.UnacceptableDTCs)
+            BBBLib.Log.LogMsg("Error Saving Data: (RFID) " + Gvars.MyData.RFID_Tag)
+            BBBLib.Log.LogMsg("Error Saving Data: (RFID Idx) " + Gvars.MyData.RFID_Idx.ToString)
+            BBBLib.Log.LogMsg("Error Saving Data: (BIN) " + Gvars.MyData.Bin)
+            MsgBox("Error Saving data Please contact Supervisor.  " + ex.ToString)
+        End Try
+
+    End Function
+
     Private Function savedata()
+
         'If (ckboxSaveDataEnabled.Checked = False) And (PanelDebug.Visible = True) Then
         'MessageBox.Show("Save Data ByPassed.", "Debug Mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification)
         'Exit Function
         'End If
+
         If Gvars.MyData.HoldUnit Then
             Gvars.MyData.Bin = "Hold Unit " + Gvars.MyData.Contact + " @x" + Gvars.MyData.EXT
         End If
+
+
 
         Try
 
@@ -3190,6 +3375,7 @@ Public Class Form1
 
             Dim ds As New BBBLib.SQL.dsDataSet(ConString_EPSData, aQuery, Params)
             BBBLib.SQL.RunSQLQuery(ds)
+
             BBBLib.Log.LogMsg("Data Saved: RFID Tag (idx): BIN: " + Gvars.MyData.RFID_Tag + " (" + Gvars.MyData.RFID_Idx.ToString + ") - " + Gvars.MyData.Bin)
 
             If ds.Failed Then
@@ -3203,8 +3389,8 @@ Public Class Form1
                 BBBLib.Log.LogMsg("Error Saving Data: (RFID Idx) " + Gvars.MyData.RFID_Idx.ToString)
                 BBBLib.Log.LogMsg("Error Saving Data: (BIN) " + Gvars.MyData.Bin)
                 MsgBox("Error during save data." + vbCrLf + ds.ExceptionMsg)
-
             End If
+
         Catch ex As Exception
             BBBLib.Log.LogMsg("Error Saving Data: (Exception) " + ex.ToString)
             BBBLib.Log.LogMsg("Error Saving Data: (Barcode) " + Gvars.MyData.RackBarcode)
@@ -3217,6 +3403,7 @@ Public Class Form1
             BBBLib.Log.LogMsg("Error Saving Data: (BIN) " + Gvars.MyData.Bin)
             MsgBox("Error Saving data Please contact Supervisor.  " + ex.ToString)
         End Try
+
     End Function
 
     Private Function save_T1XX_data()
