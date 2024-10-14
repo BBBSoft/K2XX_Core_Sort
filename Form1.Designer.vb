@@ -300,7 +300,7 @@ Partial Class Form1
         Me.PanelQ3.Controls.Add(Me.btnYes3)
         Me.PanelQ3.Controls.Add(Me.btnNo3)
         Me.PanelQ3.Enabled = False
-        Me.PanelQ3.Location = New System.Drawing.Point(1, 492)
+        Me.PanelQ3.Location = New System.Drawing.Point(8, 601)
         Me.PanelQ3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ3.Name = "PanelQ3"
         Me.PanelQ3.Size = New System.Drawing.Size(457, 32)
@@ -369,6 +369,7 @@ Partial Class Form1
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.msMsg})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -472,7 +473,6 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PanelK2XX.Controls.Add(Me.PanelQ6)
-        Me.PanelK2XX.Controls.Add(Me.PanelQ3)
         Me.PanelK2XX.Controls.Add(Me.PanelQ5)
         Me.PanelK2XX.Controls.Add(Me.PanelQ4)
         Me.PanelK2XX.Controls.Add(Me.PanelBushingInfo)
@@ -507,11 +507,12 @@ Partial Class Form1
         Me.PanelQ6.Controls.Add(Me.btnYes6)
         Me.PanelQ6.Controls.Add(Me.btnNo6)
         Me.PanelQ6.Enabled = False
-        Me.PanelQ6.Location = New System.Drawing.Point(1, 457)
+        Me.PanelQ6.Location = New System.Drawing.Point(1, 496)
         Me.PanelQ6.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ6.Name = "PanelQ6"
         Me.PanelQ6.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ6.TabIndex = 44
+        Me.PanelQ6.Visible = False
         '
         'lblQ6
         '
@@ -561,11 +562,12 @@ Partial Class Form1
         Me.PanelQ5.Controls.Add(Me.btnYes5)
         Me.PanelQ5.Controls.Add(Me.btnNo5)
         Me.PanelQ5.Enabled = False
-        Me.PanelQ5.Location = New System.Drawing.Point(1, 421)
+        Me.PanelQ5.Location = New System.Drawing.Point(1, 460)
         Me.PanelQ5.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ5.Name = "PanelQ5"
         Me.PanelQ5.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ5.TabIndex = 43
+        Me.PanelQ5.Visible = False
         '
         'lblQ5
         '
@@ -615,11 +617,12 @@ Partial Class Form1
         Me.PanelQ4.Controls.Add(Me.btnYes4)
         Me.PanelQ4.Controls.Add(Me.btnNo4)
         Me.PanelQ4.Enabled = False
-        Me.PanelQ4.Location = New System.Drawing.Point(1, 386)
+        Me.PanelQ4.Location = New System.Drawing.Point(1, 425)
         Me.PanelQ4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelQ4.Name = "PanelQ4"
         Me.PanelQ4.Size = New System.Drawing.Size(457, 32)
         Me.PanelQ4.TabIndex = 42
+        Me.PanelQ4.Visible = False
         '
         'lblQ4
         '
@@ -842,6 +845,7 @@ Partial Class Form1
         Me.dgv.Location = New System.Drawing.Point(0, 238)
         Me.dgv.Name = "dgv"
         Me.dgv.ReadOnly = True
+        Me.dgv.RowHeadersWidth = 51
         Me.dgv.Size = New System.Drawing.Size(941, 70)
         Me.dgv.TabIndex = 27
         '
@@ -1286,6 +1290,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(964, 759)
         Me.Controls.Add(Me.btnReclassify)
+        Me.Controls.Add(Me.PanelQ3)
         Me.Controls.Add(Me.lblBillOfLading)
         Me.Controls.Add(Me.btnChangeBoL)
         Me.Controls.Add(Me.Label1)

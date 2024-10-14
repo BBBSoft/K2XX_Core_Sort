@@ -787,6 +787,22 @@ Public Class Form1
                 Gvars.GetDTCsForT1XX()
 
             End If
+
+            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
+
+                PanelQ4.Visible = False
+                PanelQ5.Visible = False
+                PanelQ6.Visible = False
+
+            ElseIf Gvars.ProductType = Gvars.eProductType.K2XX_BBB Then
+
+                PanelQ4.Visible = True
+                PanelQ5.Visible = True
+                PanelQ6.Visible = True
+            End If
+
+
+
             tt.SetToolTip(btnRunInhale, Gvars.InhalePrg.AppPath)
         End If
     End Sub
@@ -952,6 +968,9 @@ Public Class Form1
         PanelBushingInfo.Visible = False
         'btnNoTag.Enabled = True
 
+        PanelQ4.Visible = False
+        PanelQ5.Visible = False
+        PanelQ5.Visible = False
 
         MachineState = eMachineState.SelectProduct
 
