@@ -578,15 +578,64 @@
                 If Gvars.Global_B Then
                     Gvars.MyData.ECU_Software_Number = dgv.Rows(0).Cells("ECU__Software_Number").Value.ToString
                 Else
-                    Gvars.MyData.ECU_Software_Number = dgv.Rows(0).Cells("ECU_Software_Number").Value.ToString
-                    Gvars.MyData.ECU_SN = dgv.Rows(0).Cells("ECU_Serial_Number").Value.ToString
-                    Gvars.MyData.SoftwareBuildDate = dgv.Rows(0).Cells("Software_Build_Date").Value.ToString
-                    Gvars.MyData.Cal0 = dgv.Rows(0).Cells("Calibration_0").Value.ToString
-                    Gvars.MyData.Cal1 = dgv.Rows(0).Cells("Calibration_1").Value.ToString
-                    Gvars.MyData.Cal2 = dgv.Rows(0).Cells("Calibration_2").Value.ToString
-                    Gvars.MyData.BootloaderSoftwareID = dgv.Rows(0).Cells("Bootloader_Software_Identifier").Value.ToString
+
+                    If dgv.Columns.Contains("ECU__Software_Number") Then
+                        Gvars.MyData.ECU_Software_Number = dgv.Rows(0).Cells("ECU__Software_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("ECU_Software_Number") Then
+                        Gvars.MyData.ECU_Software_Number = dgv.Rows(0).Cells("ECU_Software_Number").Value.ToString
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("EPS_System_Serial_Number") Then
+                        Gvars.MyData.ECU_SN = dgv.Rows(0).Cells("EPS_System_Serial_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("ECU_Serial_Number") Then
+                        Gvars.MyData.ECU_SN = dgv.Rows(0).Cells("ECU_Serial_Number").Value.ToString
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("Software_Build_Date") Then
+                        Gvars.MyData.SoftwareBuildDate = dgv.Rows(0).Cells("Software_Build_Date").Value.ToString
+                    Else
+                        Gvars.MyData.SoftwareBuildDate = "NoColumn"
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("Calibration_0_Release_Number") Then
+                        Gvars.MyData.Cal0 = dgv.Rows(0).Cells("Calibration_0_Release_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("Calibration_0") Then
+                        Gvars.MyData.Cal0 = dgv.Rows(0).Cells("Calibration_0").Value.ToString
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("Calibration_1_Release_Number") Then
+                        Gvars.MyData.Cal1 = dgv.Rows(0).Cells("Calibration_1_Release_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("Calibration_0") Then
+                        Gvars.MyData.Cal1 = dgv.Rows(0).Cells("Calibration_1").Value.ToString
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("Calibration_2_Release_Number") Then
+                        Gvars.MyData.Cal2 = dgv.Rows(0).Cells("Calibration_2_Release_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("Calibration_2") Then
+                        Gvars.MyData.Cal2 = dgv.Rows(0).Cells("Calibration_2").Value.ToString
+                    End If
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("Bootloader_Software_Number") Then
+                        Gvars.MyData.BootloaderSoftwareID = dgv.Rows(0).Cells("Bootloader_Software_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("Bootloader_Software_Identifier") Then
+                        Gvars.MyData.BootloaderSoftwareID = dgv.Rows(0).Cells("Bootloader_Software_Identifier").Value.ToString
+                    End If
+
                     Gvars.MyData.BootloaderSoftwareVer = dgv.Rows(0).Cells("Bootloader_Software_Version").Value.ToString
-                    Gvars.MyData.CCAHardwarePN = dgv.Rows(0).Cells("CCA_Hardware_Part_Number").Value.ToString
+
+                    '-----------------------------------------------------------
+                    If dgv.Columns.Contains("CCA_Hardware_Part_Number") Then
+                        Gvars.MyData.CCAHardwarePN = dgv.Rows(0).Cells("CCA_Hardware_Part_Number").Value.ToString
+                    End If
+                    If dgv.Columns.Contains("CCHardwarePN") Then
+                        Gvars.MyData.CCAHardwarePN = dgv.Rows(0).Cells("CCHardwarePN").Value.ToString
+                    End If
                 End If
 
             End If

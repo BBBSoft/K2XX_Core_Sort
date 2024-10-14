@@ -2174,7 +2174,8 @@ Public Class Form1
                        BBBLib.Func.theComputerName = "LAM-LJUAREZ" Then
                         If (Gvars.MyData.HoldUnit = True) Then
 
-                            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                            'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                            If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
                                 'Imprime el bol xd
                                 SetupPrintLabel_BOL()
                                 Try
@@ -2189,7 +2190,9 @@ Public Class Form1
                                 setupPrtdoc()
                                 PrtDoc.Print()
 
-                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
+
                                     'Imprime el bol xd
                                     SetupPrintLabel_BOL()
                                     Try
@@ -2203,7 +2206,9 @@ Public Class Form1
                             End Try
                             If Gvars.MyData.Bin.Contains("Remove MPP") Then
 
-                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                                If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
+
                                     'Imprime el bol xd
                                     SetupPrintLabel_BOL()
                                     Try
@@ -2287,7 +2292,9 @@ Public Class Form1
                     lblDisposition.Text = "Hold for " + Gvars.MyData.Contact + " @ x" + Gvars.MyData.EXT
                     SetupPrintLabel_HoldUnit()
 
-                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
+
                         'Imprime el bol xd
                         SetupPrintLabel_BOL()
                         Try
@@ -2318,7 +2325,9 @@ Public Class Form1
                     lblDisposition.Text = "Hold for " + Gvars.MyData.Contact + " @ x" + Gvars.MyData.EXT
                     SetupPrintLabel_HoldUnit()
 
-                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
+
                         'Imprime el bol xd
                         SetupPrintLabel_BOL()
                         Try
@@ -2335,7 +2344,8 @@ Public Class Form1
                     setupPrtdoc()
                     PrtDoc.Print()
 
-                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    'If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Then
+                    If Gvars.ProductType = Gvars.eProductType.K2XX_GM__AC_Delco Or Gvars.ProductType = Gvars.eProductType.T1XX_GM Then
                         'Imprime el bol xd
                         SetupPrintLabel_BOL()
                         Try
